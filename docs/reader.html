@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Full PDF reader — Research Library</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.reader-main{max-width:1300px;padding-top:18px}
+.reader-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.reader-heading h1{font-size:clamp(1.35rem,2.4vw,2.1rem);overflow-wrap:anywhere;margin:.25em 0}
+.reader-heading p{margin:.25em 0}
+.reader-controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:5;background:#f5f8f8;border:1px solid #d7e2e5;border-radius:10px;padding:10px;margin:16px 0 8px}
+.reader-controls button,.reader-controls a{padding:8px 11px;font-size:.92rem;min-width:0}
+.reader-controls .secondary-link{background:#fff;color:#174f60;border:1px solid #a6bdc5;text-decoration:none;border-radius:8px}
+.reader-controls label{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.reader-controls input{width:5rem;padding:6px 7px}
+.reader-controls [disabled]{opacity:.5;cursor:default}
+.reader-spacer{flex:1}
+.reader-stage{background:#3e484d;border-radius:12px;padding:15px;min-height:65vh;overflow:auto;text-align:center}
+.reader-stage canvas{display:block;margin:auto;background:#fff;box-shadow:0 5px 18px #0004;max-width:none}
+.reader-status{margin:18px auto;max-width:700px;background:#fff;border-radius:8px;padding:14px;text-align:left}
+.reader-status[hidden],.reader-stage[hidden]{display:none}
+.reader-foot{font-size:.86rem;color:#52646b}
+@media(max-width:650px){.reader-controls{gap:6px;padding:8px;top:0}.reader-controls button,.reader-controls a{padding:7px 9px;font-size:.85rem}.reader-stage{padding:7px;min-height:65vh}.reader-main{padding:14px 8px}.reader-heading{padding:0 7px}.reader-spacer{display:none}}
+</style>
+</head>
+<body>
+<header><div class="shell top"><div class="brand">MATHEMATICS OF CERTIFIABLE SELF-IMPROVEMENT <span class="pill">PRIVATE READER</span></div><nav class="nav" aria-label="Library navigation"><a href="index.html#catalog">All papers</a><a href="theory.html">Core theory</a><a href="semantic-search.html">Semantic search</a></nav></div></header>
+<main class="reader-main">
+<div class="reader-heading"><div><p class="eyebrow">Complete manuscript preview</p><h1 id="paper-title">Loading manuscript…</h1><p class="muted" id="paper-meta"></p></div></div>
+<div class="reader-controls" aria-label="PDF reader controls">
+<button type="button" id="prev" class="secondary" disabled>‹ Previous</button>
+<label>Page <input id="page-input" type="number" min="1" step="1" value="1" aria-label="PDF page number" disabled> <span id="total-pages">of …</span></label>
+<button type="button" id="next" class="secondary" disabled>Next ›</button>
+<button type="button" id="zoom-out" class="secondary" aria-label="Zoom out" disabled>−</button>
+<button type="button" id="zoom-in" class="secondary" aria-label="Zoom in" disabled>+</button>
+<button type="button" id="fit-width" class="secondary" disabled>Fit width</button>
+<button type="button" id="full-screen" class="secondary">Full screen</button>
+<span class="reader-spacer"></span>
+<a id="open-original" class="secondary-link" target="_blank" rel="noopener noreferrer">Open original PDF</a>
+<a id="download-pdf" class="primarylink" download>Download PDF</a>
+</div>
+<div class="reader-stage" id="reader-stage"><div id="reader-status" class="reader-status" role="status">Preparing the complete PDF preview…</div><canvas id="reader-canvas" hidden aria-label="PDF page preview"></canvas></div>
+<p class="reader-foot">Read all pages using Previous/Next, enter a page number, or use the original PDF's browser viewer for text selection and searching. Download is optional. The manuscript stays inside your private Codespaces preview; this page does not publish it.</p>
+</main>
+<script src="catalog.js"></script>
+<script type="module" src="assets/reader.js"></script>
+</body></html>
