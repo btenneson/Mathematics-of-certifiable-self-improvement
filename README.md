@@ -1,6 +1,6 @@
 # Mathematics of Certifiable Self-Improvement
 
-**Status: private staging; not publicly published.** The repository is organized and ready for review before the owner chooses to make it public.
+**Status: private staging; not publicly published.** The repository is organized for private use; no website publication is configured.
 
 This research collection studies proof-carrying revision, costed self-improvement, finite settlement games, information-aware choice, verifier contracts, and successor evidence. It is a **research library**, not a claim that a production self-improving AI exists.
 
@@ -29,11 +29,17 @@ The complete source archive was previously screened from 362 file entries to 69 
 
 The `FORGE-6` materials are **historical research records**, not an active deployed system. CAMI is the current focus for self-improvement research.
 
-## Preview and eventual publication
+## View the private website in Chrome on Windows
 
-On desktop: from the repository root run `python -m http.server 8000`, then visit `http://localhost:8000/docs/`. The layout supports mobile browsers. PDF links intentionally point to their **canonical GitHub file pages**, so they also work on GitHub Pages when this repository becomes public.
+**The repository and the papers remain private. No GitHub Pages site is configured or requested.** GitHub's folder listing is not the research website. To open the actual website, make a local copy of your private repository:
 
-After editorial/privacy and attribution review, the owner may change repository visibility to **public**, then open **Settings → Pages → Build and deployment**, choose **Deploy from a branch**, `main`, `/docs`, and save. The expected public site address will be `https://btenneson.github.io/Mathematics-of-certifiable-self-improvement/` **only after GitHub Pages has been enabled and the deployment succeeds**. See [publishing checklist](PUBLISHING.md).
+1. While signed into GitHub, [download the ZIP from your private repository](https://github.com/btenneson/Mathematics-of-certifiable-self-improvement/archive/refs/heads/main.zip).
+2. In Windows File Explorer, choose **Extract All** (do not open from inside the ZIP).
+3. Open the extracted folder and double-click **OPEN_PRIVATE_LIBRARY_WINDOWS.bat**. This launches a local website in Chrome or your default browser.
+
+If Python is available, the launcher starts a small HTTP server bound only to `127.0.0.1` (your laptop), at `http://127.0.0.1:8765/docs/`. If Python is not available, it opens `docs/index.html` as a local file. In that fallback mode, the library catalog, original PDFs, ratings and finite lab are available; optional semantic search requires an HTTP server and an additional model download.
+
+All document links are **relative links into the downloaded library**, not public URLs. The catalog includes 48 available PDFs. Seven supporting text/source files are still missing from the curated selection. [Private viewer setup](PRIVATE_PREVIEW.md).
 
 ## Research-status boundaries
 
