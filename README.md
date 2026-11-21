@@ -1,6 +1,6 @@
 # Mathematics of Certifiable Self-Improvement
 
-**Status: private staging; not publicly published.** The repository is organized for private use; no website publication is configured.
+**Status: private source repository. The publicly readable website is ready for Pages activation.**
 
 This research collection studies proof-carrying revision, costed self-improvement, finite settlement games, information-aware choice, verifier contracts, and successor evidence. It is a **research library**, not a claim that a production self-improving AI exists.
 
@@ -29,7 +29,11 @@ The complete source archive was previously screened from 362 file entries to 69 
 
 The `FORGE-6` materials are **historical research records**, not an active deployed system. CAMI is the current focus for self-improvement research.
 
-## View the private website in Chrome on Windows
+## Private repository, publicly readable website
+
+The requested arrangement is a **private GitHub source repository with a publicly accessible GitHub Pages site**. The `docs/` website now includes the research files and 2D ratings needed to display them through GitHub Pages. Do not change repository visibility. See [Pages activation instructions](DEPLOY_GITHUB_PAGES.md). Publishing from a private repository requires a GitHub Pro, Team, or Enterprise plan; GitHub Free cannot activate this Pages arrangement.
+
+## Optional local Chrome preview on Windows
 
 **The repository and the papers remain private. No GitHub Pages site is configured or requested.** GitHub's folder listing is not the research website. To open the actual website, make a local copy of your private repository:
 
@@ -39,7 +43,7 @@ The `FORGE-6` materials are **historical research records**, not an active deplo
 
 If Python is available, the launcher starts a small HTTP server bound only to `127.0.0.1` (your laptop), at `http://127.0.0.1:8765/docs/`. If Python is not available, it opens `docs/index.html` as a local file. In that fallback mode, the library catalog, original PDFs, ratings and finite lab are available; optional semantic search requires an HTTP server and an additional model download.
 
-All document links are **relative links into the downloaded library**, not public URLs. The catalog includes 48 available PDFs. Seven supporting text/source files are still missing from the curated selection. [Private viewer setup](PRIVATE_PREVIEW.md).
+All document links are **relative links into the website's `docs/library` folder**, working both online through Pages and in local preview. The catalog includes 48 available PDFs. Seven supporting text/source files are still missing from the curated selection. [Private viewer setup](PRIVATE_PREVIEW.md).
 
 ## Research-status boundaries
 

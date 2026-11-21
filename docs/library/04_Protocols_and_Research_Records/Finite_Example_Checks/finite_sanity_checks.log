@@ -1,0 +1,12 @@
+test_W1_identical_cost_signatures (__main__.FiniteCases.test_W1_identical_cost_signatures) ... ok
+test_W2_equal_value_not_strongly_equivalent (__main__.FiniteCases.test_W2_equal_value_not_strongly_equivalent) ... ok
+test_W2_sampled_stable_quotients (__main__.FiniteCases.test_W2_sampled_stable_quotients) ... ok
+test_W3_exhaustive_three_state_receipt_tables (__main__.FiniteCases.test_W3_exhaustive_three_state_receipt_tables) ... ok
+test_W3_pairwise_global_gap (__main__.FiniteCases.test_W3_pairwise_global_gap) ... ok
+test_W3_threshold_monotonicity (__main__.FiniteCases.test_W3_threshold_monotonicity) ... ok
+test_W3_two_hidden_states (__main__.FiniteCases.test_W3_two_hidden_states) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.114s
+
+OK
