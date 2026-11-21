@@ -1,0 +1,298 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.82in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{booktabs,longtable,array}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\setlist{nosep,itemsep=3pt,topsep=5pt}
+\definecolor{navy}{RGB}{23,43,70}
+\definecolor{grayblue}{RGB}{78,98,121}
+\hypersetup{pdftitle={A Uniform Preservation Criterion and Indexed Consistency Induction for Sovereign Gifts},pdfauthor={DATA MIND / CAMI (ChatGPT GPT-6), under research direction of Brian Tenneson},pdfsubject={Atlas-audited revision 2: conditional model preservation and indexed induction}}
+\titleformat{\section}{\large\bfseries\color{navy}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{navy}}{\thesubsection}{0.7em}{}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{grayblue}AMLD+0 / Sovereign Gifts}
+\fancyhead[R]{\small\color{grayblue}Research note 001}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{counterexample}[theorem]{Counterexample}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Con}{\operatorname{Con}}
+\newcommand{\Mod}{\operatorname{Mod}}
+\newcommand{\Gb}{\mathrm{GBG+}}
+\newcommand{\GG}{\mathrm{GBG+S}}
+\newcommand{\restr}{\mathord{\upharpoonright}}
+\newcommand{\Fin}{\operatorname{Fin}}
+\begin{document}
+\begin{center}
+{\Large\bfseries\color{navy} A Uniform Preservation Criterion and\\[3pt] Indexed Consistency Induction for Sovereign Gifts}\\[10pt]
+{\normalsize AMLD+0 Five-Pass Conjecture Settlement}\\[7pt]
+{\small Research Director: Brian Tenneson}\\[2pt]
+{\small Mathematical drafting and analysis: CAMI (ChatGPT, GPT-6)}\\[2pt]
+{\small Atlas audit and revision: same ChatGPT model session; not independent verification}\\[2pt]
+{\small November 21, 2026 \quad | \quad Research note 001, revision 2}
+\end{center}
+\vspace{0.3em}
+\begin{tcolorbox}[colback=gray!6,colframe=gray!45,boxrule=0.4pt,arc=1mm]
+\small\textbf{Status.} The identity-independent logical criterion and the conditional indexed-preservation theorem below are elementary classical first-order metatheorems. The revised note adds an explicit definitional-extension test and distinguishes literal expansions from changes to existing game-state domains. Their application to the actual retained sovereign atoms is \emph{unresolved}. In particular, this note does \emph{not} prove \(\Con(\Gb)\Rightarrow\Con(\GG)\), nor does it claim independent machine verification.
+\end{tcolorbox}
+
+\begin{abstract}
+We investigate two related conjectures: (a) whether consistency-preserving extension can be characterized without reference to the name of an operation, and (b) whether an indexed family of sovereign gifts, beginning with MOBILITY and GRANT, can be proved cumulatively consistent relative to GBG+ by induction. We restate and prove exact semantic and finite-obstruction criteria for a specified first-order extension; give a concrete class of definitional extensions; prove a stronger, compositional model-expansion theorem suitable for induction; and show that compatible extension witnesses yield consistency of every finite prefix, and, by compactness, their union. We also give a sharp counterexample: separately consistent atoms may have an inconsistent union. The retained sovereign atoms have not all been shown to satisfy the extension hypotheses. These are general metatheorems and conditional research tools, not a settlement of unrestricted GBG+S relative consistency; no novelty over established model-theoretic principles is claimed.
+\end{abstract}
+
+\section{Pass I: formalization and revised indexing}
+
+Fix a classical finitary first-order metalogic. Let \(T_0\) be an \emph{explicitly fixed} first-order axiomatization of \(\Gb\), with language \(L_0\). For successive atoms \(B_i\), let \(\Delta_i\) be their independently declared axiom sets and let \(L_i\supseteq L_{i-1}\) be the cumulative languages. Write
+\begin{equation}\label{eq:prefix}
+T_n := T_0\cup\bigcup_{i=1}^{n}\Delta_i, \qquad
+\mathsf{Target}(n):\quad \Con(T_0)\Longrightarrow\Con(T_n).
+\end{equation}
+The extension must not quietly reinterpret a pre-existing symbol. In the theorems below, a \emph{literal expansion} in a nested many-sorted language leaves the domains of every \emph{old} sort, and every old symbol interpretation, unchanged. Consequently, it cannot add elements to an existing game-state sort. A GRANT-like construction adding states must instead place its versioned state space in a \emph{new} sort while retaining the original sort, or use an explicitly defined interpretation/embedding theorem that does not claim literal reduct equality. This restriction is mathematically substantive: universal sentences of the base theory may cease to hold if its old domain is enlarged. Changes to game rules, permissions or verification must be represented by explicit versions, sorts, maps or transition relations, rather than by changing the external consequence relation.
+
+\subsection{Working index, not a change to historical names}
+
+In this note \(B_1:=\mathrm{MOBILITY}\) and \(B_2:=\mathrm{GRANT}\). The remaining ten retained candidates are reindexed \emph{locally} as follows. The old B-names are retained in the second column for historical cross-reference; the new numbers do not assert any dependence theorem.
+\begin{center}
+\small
+\begin{tabular}{@{}>{\bfseries}l l p{3.55in}@{}}
+\toprule
+New & Historical & Candidate \\
+\midrule
+\(B_1\) & M & MOBILITY (provisional) \\
+\(B_2\) & G & GRANT (provisional) \\
+\(B_3\) & old B1 & Verifier Succession (undecided) \\
+\(B_4\) & old B2 & Unlock--Revise--Relock \\
+\(B_5\) & old B4 & Fork \\
+\(B_6\) & old B8 & Abdicate (guarded) \\
+\(B_7\) & old B9 & Resurrect (guarded) \\
+\(B_8\) & old B11 & Cross-System Trade \\
+\(B_9\) & old B14 & Clock Rewrite \\
+\(B_{10}\) & old B18 & Copy--Promote \\
+\(B_{11}\) & old B19 & One Office, Many Executors \\
+\(B_{12}\) & old B20 & Finite-Step Replication \\
+\bottomrule
+\end{tabular}
+\end{center}
+These are \emph{candidate} operations. Their inclusion in a catalogue is not proof of well-definedness, realizability or consistency.
+
+The earlier GBG+S gift grammar also imposes a separate requirement: gift number \(n\) has exactly \(n\) distinct atomic ingredients in its support. One may \emph{propose} a composite \(K(B_1,\dots,B_n)\) of support size \(n\), but an indexed list by itself does not prove that the actual grammar \(K\) can form it or that the resulting gift is admissible. The present theorem addresses the logical consistency of cumulative \emph{prefix theories}; faithful implementation of the stage protocol is an additional obligation.
+
+\section{Pass II: general preservation theorems}
+\subsection{An exact operation-independent criterion}
+
+\begin{theorem}[Exact consistency criterion]\label{thm:exact}
+Let \(T\) be any classical first-order theory in language \(L\), and let \(\Delta\) be any set of sentences in an extended language \(L'\supseteq L\), with \(T\) interpreted using its original symbols. Then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item \(T\cup\Delta\) is syntactically consistent;
+\item for every finite \(F\subseteq\Delta\), \(T\not\vdash\neg\bigwedge F\), where \(\bigwedge\varnothing:=\top\);
+\item there exists \(\mathcal N\models T\cup\Delta\);
+\item there exist \(\mathcal M\models T\) and an expansion \(\mathcal N\models T\cup\Delta\) whose \(L\)-reduct is \(\mathcal M\).
+\end{enumerate}
+The criterion is independent of the particular name or subject matter of the proposed operation, but it restates satisfiability rather than providing a generally effective or syntactically local certification method. We do not claim this standard equivalence is a new logic theorem.
+\end{theorem}
+\begin{proof}
+If a contradiction is derivable from \(T\cup\Delta\), a finite formal proof uses only finitely many sentences \(F\subseteq\Delta\). The deduction theorem, applied to those sentences, yields \(T\vdash\neg\bigwedge F\), and conversely such a derivation gives a contradiction upon adjoining \(F\). This proves (i)\(\Leftrightarrow\)(ii), including \(F=\varnothing\), which detects inconsistency in \(T\). First-order soundness and completeness give (i)\(\Leftrightarrow\)(iii). Taking the reduct of a model in (iii) proves (iv), and an expansion as in (iv) is already a model as in (iii).
+\end{proof}
+
+This criterion is exact but not generally an effective algorithm. In particular, a search that has found no contradiction is not a proof of consistency. Moreover, mere consistency of an extension is weaker than the ability to expand \emph{every} model of the base.
+
+\begin{definition}[Uniform expansion property]\label{def:uep}
+A specified operation with axioms \(\Delta\) has the \emph{uniform expansion property} over \(T\), abbreviated \(\mathsf{UEP}(T,\Delta)\), if
+\[
+\forall\mathcal M\models T\;\exists\mathcal N\models T\cup\Delta
+\quad (\mathcal N\restr L=\mathcal M).
+\]
+The equality of reducts is literal: old-sorted domains as well as old-symbol interpretations are preserved. The new language may introduce additional sorts; relations on the old sorts can be extended only when they are fresh relation symbols.
+\end{definition}
+
+\begin{proposition}[Sufficiency and conservativity]\label{prop:uep}
+If \(\mathsf{UEP}(T,\Delta)\), then \(\Con(T)\Rightarrow\Con(T\cup\Delta)\). Furthermore, \(T\cup\Delta\) is conservative over \(T\) for sentences of \(L\). The uniform expansion property is not necessary for mere consistency of \(T\cup\Delta\).
+\end{proposition}
+\begin{proof}
+Every model of \(T\) has an expansion by hypothesis, proving consistency transfer. Suppose \(T\cup\Delta\vdash\varphi\) for an old-language sentence \(\varphi\), but \(T\not\vdash\varphi\). By completeness, some \(\mathcal M\models T\cup\{\neg\varphi\}\) exists. Its stipulated expansion would satisfy both \(\varphi\) and \(\neg\varphi\), contradiction. For non-necessity, take the empty theory in a language with a unary predicate \(P\), and add \(\exists xP(x)\). The extension is consistent but models with \(P\) empty cannot expand to it while preserving the old interpretation of \(P\).
+\end{proof}
+
+\subsection{A noncircular sufficient test: explicit definitions}
+
+\begin{proposition}[Definitional-extension certificate]\label{prop:definitional}
+Let $T$ be a first-order theory in $L$. Construct $L'$ in finitely many stages by adding only new relation symbols $R$ with axioms
+\[
+\forall\bar x\,(R(\bar x)\leftrightarrow\varphi_R(\bar x)),
+\]
+where $\varphi_R$ uses symbols already available at that stage; and new function symbols $f$ with axioms
+\[
+\forall\bar x\,\varphi_f(\bar x,f(\bar x)),
+\]
+where the preceding theory proves $\forall\bar x\,\exists!y\,\varphi_f(\bar x,y)$.
+Then every $L$-model of $T$ has an $L'$-expansion satisfying the defining axioms. The resulting theory is consistent relative to $T$ and conservative for $L$-sentences.
+\end{proposition}
+\begin{proof}
+For a given model of the preceding theory, interpret $R$ as the tuple set defined by $\varphi_R$. The existence--uniqueness condition uniquely determines $f$ on every input tuple. None of these interpretations changes an old symbol or an old sort. Repeat the construction through the finite sequence and apply Proposition~\ref{prop:uep}.
+\end{proof}
+
+\noindent This gives a \emph{proof-checkable form of obligation}: a proposed function needs a supplied derivation of unique existence; the definitions themselves can be inspected. It does not give a terminating general proof-search procedure. It does not prove that arbitrary gift operators are mere definitional extensions or that such operations have the required physical, authorization or strategic effects. A nontrivial fresh \emph{new-sorted} finite transition system can also be adjoined, leaving the base sorts untouched, but this alone is not faithful MOBILITY or GRANT.
+
+\subsection{A compositional invariant-preservation theorem}
+
+The exact criterion is largely logical; to implement gifts we seek a stronger constructive contract. Let \(\mathcal K_n\subseteq\Mod(T_n)\) be a class of \emph{eligible} models equipped with any further semantic invariant \(I_n\): fixed sovereign identity, declared and legal transitions, recorded history, permitted object-level changes, base-game projection, admission commitments, and separation of external gift installation from activated moves. The requirements must be specified \emph{independently} of the assertion that a desired extension is consistent. In particular, the set $\mathcal K_n$ is not a newly invented consistency oracle: one must give independently checkable axioms/invariants and a construction that is proved to land in the indicated class.
+
+\begin{theorem}[Uniform indexed model-preservation]\label{thm:indexed}
+Assume \(\mathcal K_0=\Mod(T_0)\) and, for each \(i\geq1\), an explicitly specified construction
+\[
+E_i:\mathcal K_{i-1}\longrightarrow\mathcal K_i
+\]
+is total on its stated domain, with \(E_i(\mathcal M)\restr L_{i-1}=\mathcal M\). The languages are nested many-sorted languages, so any genuinely new versioned states inhabit new sorts, not the old state sort. Then for every finite \(n\), every model of \(T_0\) has an iterated expansion to a model of \(T_n\). Consequently
+\begin{equation}\label{eq:result}
+\forall n<\omega,\qquad
+\Con(T_0)\Longrightarrow\Con(T_n).
+\end{equation}
+Each \(T_n\) is also conservative over \(T_0\) for \(L_0\)-sentences.
+\end{theorem}
+\begin{proof}
+Fix any \(\mathcal M_0\models T_0\), so \(\mathcal M_0\in\mathcal K_0\). Define recursively \(\mathcal M_i=E_i(\mathcal M_{i-1})\). Totality and the codomain condition ensure \(\mathcal M_i\in\mathcal K_i\subseteq\Mod(T_i)\) for each \(i\), while the reduct condition ensures the chain respects all earlier interpretations. Thus \(\mathcal M_n\models T_n\). Since the choice of \(\mathcal M_0\) was arbitrary, every old model expands, and Proposition~\ref{prop:uep} gives conservativity. In particular, if \(T_0\) has a model then every \(T_n\) does; soundness yields the displayed consistency implication.
+\end{proof}
+
+\begin{remark}[A weaker sufficient variant]
+For consistency alone, it suffices that \(\mathcal K_0\) contain \emph{some} model of \(T_0\) whenever \(T_0\) is consistent, and that each \(E_i\) be defined on reachable \(\mathcal K_{i-1}\). The resulting conclusion need not be conservative for every \(T_0\)-model. The all-model version above is intentionally stronger and easier to compose. For either version, a mere declaration that $E_i$ maps eligible models to eligible models is not an operational proof: the particular construction and its preservation lemma must be established separately.
+\end{remark}
+
+\begin{corollary}[Infinite cumulative theory]\label{cor:omega}
+Under Theorem~\ref{thm:indexed}, \(\Con(T_0)\Rightarrow\Con(T_\omega)\), where \(T_\omega=\bigcup_{n<\omega}T_n\). The union is also conservative over $T_0$ for old-language sentences.
+\end{corollary}
+\begin{proof}
+Every finite subset of \(T_\omega\) lies in some \(T_n\), because the family is increasing. Each \(T_n\) is consistent by Theorem~\ref{thm:indexed}. Compactness, equivalently the finitary character of first-order proofs, gives consistency of \(T_\omega\). If $T_\omega\vdash\psi$ for an $L_0$-sentence, the proof uses axioms from some finite $T_n$, so conservativity of $T_n$ gives $T_0\vdash\psi$. This does not establish that an infinite sequence constitutes a completed playable game.
+\end{proof}
+
+\section{Pass III: counterexamples and failure modes}
+
+\begin{counterexample}[Separate safety does not imply cumulative safety]\label{cx:pn}
+Assume \(T_2\) is consistent and \(p\) is a fresh nullary predicate. Let \(\Delta_3=\{p\}\) and \(\Delta_4=\{\neg p\}\). Then both \(T_2\cup\Delta_3\) and \(T_2\cup\Delta_4\) are consistent, but
+\[
+T_2\cup\Delta_3\cup\Delta_4\vdash\bot.
+\]
+Thus even if both proposed atoms are separately safe relative to \(T_2\), their cumulative conjunction is not. The example is generic; it is \emph{not} a claim that two particular retained sovereign atoms behave this way.
+\end{counterexample}
+
+\begin{remark}[Finite-prefix consistency is not all-order consistency]
+The conclusion for the chosen prefix order does not license arbitrary permutations, repetitions or mixed composites. To cover every finite admissible history, one needs a history-indexed class and a step theorem applying at \emph{every} admissible successor of \emph{every} eligible history. Such a strengthening is possible in abstract form, but cannot be assumed for the retained atoms.
+\end{remark}
+
+\begin{counterexample}[A global prohibition blocks a new permission]
+Suppose the unchanged base theory includes \(\forall s\,\neg\mathsf{Permit}(P,\rho,s)\) and an extension asserts \(\exists s\,\mathsf{Permit}(P,\rho,s)\) over the \emph{same} state sort and predicates. Their union is inconsistent. A valid versioned construction might instead distinguish old-game states from new-game states; doing so requires an explicit semantic interface and does not automatically prove the intended unrestricted GRANT axiom.
+\end{counterexample}
+
+\begin{remark}[The implication cannot repair a bad base]
+If \(T_i\) is inconsistent, adding further axioms cannot restore its consistency while keeping the same monotone deduction relation and old axioms. A rollback or revision is a different formal operation and requires its own interpretation.
+\end{remark}
+
+\section{Pass IV: adversarial audit of the induction methods}
+
+\subsection{Ordinary versus complete induction}
+
+A proof of Theorem~\ref{thm:indexed} can use ordinary induction. \emph{Complete induction} (strong induction) may be more convenient when the candidate at index \(i\) depends on several preceding constructions. It is not logically stronger: each inductive step still needs a justified extension construction, with its whole cumulative history preserved.
+
+One can strengthen the inductive assertion to
+\[
+\begin{aligned}
+H(n):\quad &\text{every eligible history through index }n\\
+&\text{has a compatible realization and preservation witness.}
+\end{aligned}
+\]
+The phrase ``eligible'' must be specified through operational rules and proof obligations, not by circularly assuming the desired result. In particular, \(\Con(T_{n+1})\) cannot simply be built into the eligibility definition and then advertised as newly proved.
+
+\subsection{Wff or structural induction over gift syntax}
+
+If the gift-composition grammar \(K\) is fully defined, a separate \emph{structural induction} may show that an invariant holds for all gift expressions. For example, suppose \(K\) includes a binary constructor \(\mathsf{Compose}(g,h)\). A sound constructor lemma has the form
+\[
+I(g)\wedge I(h)\wedge \mathsf{Compatible}(g,h)
+\ \Longrightarrow\ I(\mathsf{Compose}(g,h)).
+\]
+This lemma must include the actual semantics of the constructor. Base cases for every primitive atom and semantic guards for the constructors remain necessary. Structural induction alone does not establish the admissibility of a primitive or prevent incompatible gifts from being merged.
+
+\subsection{Why a generic extension is not yet a sovereign extension}
+
+The codomain statement $E_i(\mathcal M)\in\mathcal K_i$ is a valid hypothesis of an assembly theorem, but it is \emph{not an independent proof} that a requested gift is realizable. Three checks must be shown in a concrete application:
+\begin{enumerate}[label=(\alph*)]
+\item The construction genuinely produces the stipulated operational effect rather than adding an unused symbol or a disconnected transition;
+\item every original first-order axiom remains true under a fixed reduct or a separately proved interpretation, without enlarging an old sort in violation of its quantified statements;
+\item interactions with previously acquired powers preserve the cumulative obligations, not just each atom's stand-alone behavior.
+\end{enumerate}
+These are the specific points at which an apparent one-line induction can fail. Theorem~\ref{thm:indexed} cannot be used as evidence for any $E_i$ until those checks have succeeded.
+
+\subsection{The MOBILITY and GRANT base obligations}
+
+With the revised working index, full application demands:
+\begin{align*}
+\Con(T_0)&\Longrightarrow\Con(T_0\cup\Delta_1),
+&& B_1=\mathrm{MOBILITY},\\
+\Con(T_1)&\Longrightarrow\Con(T_1\cup\Delta_2),
+&& B_2=\mathrm{GRANT}.
+\end{align*}
+The November 21 \emph{Uniform GRANT Extension} note establishes a construction only for \emph{GRANT-ready MOBILITY presentations}, subject to explicit conditions allowing fresh states, actions, authorizations and projections. It does not prove that every \(T_1\)-model is GRANT-ready. A restricted MOBILITY construction likewise does not establish full relative consistency over arbitrary GBG+ models. These are real dependencies, not technicalities to be suppressed.
+
+\subsection{Required frozen obligations}
+
+Every proposed application must check the following independently of the general theorem:
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{Fixed foundation:} the actual axioms of \(\Gb\) are retained, including unique Player 0, rule-complete states, board legality and the relevant authority restrictions.
+\item \textbf{Typed semantics:} each \(\Delta_i\) gives a faithful, nonvacuous operational meaning; its action is not merely an inert fresh symbol.
+\item \textbf{Historical compatibility:} old rules, proofs, authorizations, commitments and histories are preserved or transported by explicitly justified maps.
+\item \textbf{External gate:} admission and STOP are independently justified and do not rest solely on an untrusted new checker saying ``consistent.''
+\item \textbf{Composite gifts:} the original support-size and gift grammar \(K\) requirements are met, including composition and interaction obligations.
+\item \textbf{Activation:} a \emph{completed} game contains an actual legal internal move; a dormant zero-gift STOP history is not silently counted as completed play.
+\item \textbf{Global theory bridge:} the assembled \(T_n\), or any limiting theory, must be proved to satisfy the \emph{intended} GBG+S axioms, which are not fully settled by the generic extension theorem.
+\end{enumerate}
+
+\subsection{Atlas audit record for revision 2}
+
+The audit identified and repaired four material ambiguities in the first edition:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Domain preservation:} clarified that literal expansion preserves domains of old sorts; new versioned states require new sorts or a separate interpretation proof.
+\item \emph{Operational content:} added Proposition~\ref{prop:definitional} as a concrete, noncircular certificate for a restricted class, and identified why the abstract mapping theorem alone is not a gift-specific proof.
+\item \emph{Induction scope:} separated a single fixed prefix ordering from all possible gift histories or permutations.
+\item \emph{Originality and status:} identified the exact consistency equivalence as standard logic; retained the unsolved M/G and global GBG+S obligations.
+\end{enumerate}
+A second text-and-proof audit checked all displayed implications against the stated assumptions. This internal review is not an independent formal-verification receipt and cannot guarantee the absence of undiscovered errors.
+
+\section{Pass V: settlement and research implications}
+
+\begin{tcolorbox}[colback=gray!6,colframe=gray!45,boxrule=0.5pt,arc=1mm,title={\bfseries Settlement record}]
+\textbf{(a) P, qualified.} Theorem~\ref{thm:exact} gives an exact identity-independent necessary-and-sufficient logical criterion. Proposition~\ref{prop:definitional} gives a noncircular but narrow construction, while Proposition~\ref{prop:uep} and Theorem~\ref{thm:indexed} give identity-independent \emph{sufficient} preservation conditions. No universal finite decidable checklist of all operationally safe sovereign gifts has been proved.\\[5pt]
+\textbf{(b) P conditional / U for the intended atoms.} Theorem~\ref{thm:indexed} proves a uniform implication from certified extension operators to cumulative consistency of every finite prefix. Corollary~\ref{cor:omega} handles the union under ordinary first-order compactness. The exact target for the retained candidates, \(\Con(\Gb)\Rightarrow\Con(\Gb+\{B_1,\ldots,B_n\})\), remains unproved because the base and uniform step obligations have not been established for all intended operations.\\[5pt]
+\textbf{R, general unrestricted claim.} Counterexample~\ref{cx:pn} refutes the inference from individually consistent operations to their cumulative consistency.\\[5pt]
+\textbf{No claimed resolution.} Neither unrestricted \(\Con(\Gb)\Rightarrow\Con(\GG)\) nor automatic consistency verification follows from these results.
+\end{tcolorbox}
+
+\subsection{A precise next theorem to investigate}
+
+The strongest constructive target is an \emph{Atom-Class Preservation Lemma}: give an independently defined invariant \(I\) and a semantic contract \(\mathsf{Safe}(g,I)\) such that every compliant atomic operation admits a versioned, observable extension, preserves the old language and the relevant GBG+ obligations, and makes \(I\) true at the next stage. Then separately verify \(\mathsf{Safe}(B_i,I)\) for every retained atom, with explicit compatibility for composites. If all these demonstrations succeed, Theorem~\ref{thm:indexed} transfers them into a cumulative relative-consistency theorem.
+
+The conjectured ``side effects'' of MOBILITY+GRANT can assist: if another candidate is \emph{definitionally} expressible using earlier operations and the expansion is conservative, a new primitive consistency argument may be unnecessary. But behavior simulated in one specially chosen model is not yet a general definitional or conservative extension theorem.
+
+\section*{Source and provenance notes}
+\begin{enumerate}[label={[\arabic*]},leftmargin=2.4em]
+\item DATA MIND (ChatGPT), under research direction of Brian Tenneson, \emph{The Exact Gift-Consistency Criterion: Necessary and Sufficient Conditions for Sovereign Gifts}, November 19, 2026. Consulted; elementary criteria rederived here.
+\item DATA MIND (ChatGPT), under research direction of Brian Tenneson, \emph{A Uniform GRANT Extension of MOBILITY Models: A Restricted Structural Theorem and Its Consistency-Transfer Boundary}, November 21, 2026. Consulted; its GRANT-ready hypotheses are not discarded.
+\item DATA MIND (ChatGPT), research director Brian Tenneson, \emph{From the Boring Game to the Last Gift}, Atlas-audited Revision 2, November 18--19, 2026. Consulted for the atom catalogue, foundation and caution about unrestricted consistency.
+\item Brian Tenneson, \emph{AMLD+0: The Sovereign Atom Dimension and Algebraic Unification Problem}, November 20, 2026, working research prompt. Consulted for the retained candidate set and frozen constraints.
+\end{enumerate}
+\vspace{0.5em}
+\noindent\textit{Disclaimer.} These manuscript-level results are not independently peer-reviewed or machine-checked. The unrestricted GBG+S application remains open; no autonomous AMLD+0 execution is claimed.
+\end{document}
