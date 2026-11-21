@@ -2,6 +2,8 @@
 
 **Private staging. Nothing is released publicly until the owner explicitly chooses to publish.**
 
+> **Current import status:** The theory guide, site, search interface and finite lab are committed. The 71 original documents and compressed PDF passage index are in the companion 75-file upload package and still need to be added. Until then, document links and full-text search are incomplete. See [UPLOAD_INSTRUCTIONS.md](UPLOAD_INSTRUCTIONS.md).
+
 This is the curated, reversible working copy of the attached 71-file research archive. It contains 48 PDF manuscripts, source companions, research records, seven finite sanity checks, and a responsive catalog.
 
 ## Open the library
