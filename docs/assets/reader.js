@@ -47,7 +47,7 @@ async function main(){
   fail('The catalog PDF address failed the private-library safety check.');original.hidden=download.hidden=true;return
  }
  $('paper-title').textContent=article.title;
- $('paper-meta').textContent=(article.pages||'?')+' pages · Research rating '+article.quality.toFixed(1)+'/10 · AI improvement relevance '+article.relevance.toFixed(1)+'/10';
+ $('paper-meta').textContent=(article.pages||'?')+' pages · '+article.category+' · Complete manuscript';
  document.title=article.title+' — Full PDF reader';
  original.href=url.href;
  download.href=url.href;
