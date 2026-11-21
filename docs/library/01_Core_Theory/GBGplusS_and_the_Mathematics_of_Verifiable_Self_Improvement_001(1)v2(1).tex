@@ -1,0 +1,255 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.93in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem,booktabs,tabularx,array}
+\usepackage[hidelinks,breaklinks=true]{hyperref}
+\usepackage{xurl}
+\usepackage{fancyhdr,lastpage}
+\setlength{\headheight}{15pt}
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.48em}
+\setlength{\emergencystretch}{3em}
+\setlist[itemize]{leftmargin=1.6em,itemsep=0.14em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=1.8em,itemsep=0.2em,topsep=0.25em}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{theorem}[definition]{Conditional Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{question}[definition]{Research Question}
+\newcommand{\GBG}{\mathrm{GBG}}
+\newcommand{\GBGp}{\mathrm{GBG}^{+}}
+\newcommand{\GBGs}{\mathrm{GBG}^{+S}}
+\newcommand{\AMLD}{\mathrm{AMLD}}
+\newcommand{\BANK}{\mathrm{BANK}}
+\newcommand{\Adm}{\operatorname{Adm}}
+\newcommand{\Safe}{\operatorname{Safe}}
+\newcommand{\Auth}{\operatorname{Auth}}
+\newcommand{\Con}{\operatorname{Con}}
+\newcommand{\Prov}{\operatorname{Prov}}
+\newcommand{\Cost}{\operatorname{Cost}}
+\newcommand{\Live}{\operatorname{Live}}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{GBG+S and Verifiable Self-Improvement}
+\rhead{Research Draft 001}
+\cfoot{\thepage\ / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.35pt}
+\hypersetup{pdftitle={GBG+S and the Mathematics of Verifiable Self-Improvement},pdfauthor={Research Director: Brian Tenneson; research drafting: DATA MIND (GPT-6)},pdfsubject={Conditional research program on sovereign gifts, verifier-gated ATP and AMLD self-improvement}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Sovereign Gifts and the Mathematics\\[0.16em] of Verifiable Self-Improvement}\par
+\vspace{0.6em}
+{\large A Conditional Research Program for GBG+S, Automated Theorem Provers, and AMLD}\par
+\vspace{0.85em}
+\textbf{Research Director:} Brian Tenneson\\
+\textbf{Research synthesis and draft:} DATA MIND (OpenAI GPT-6 assistant)\\
+\textbf{November 21, 2026 \quad---\quad Research Article 001, audited revision v2}
+\end{center}
+
+\begin{abstract}
+The Mathematics of Verifiable Self-Improvement (MVSI) asks not merely whether a mathematical discovery system can become more effective, but whether its revisions can be authorized, certified, inherited, and evaluated without silently changing what counts as established mathematics. Earlier work on generalized board games (GBG), board-player extensions (GBG+), AMLD+0, verifier-gated dreaming, and self-improving discoverers supplies concrete results on proof reachability, passive extension, certificate inheritance, scheduler fairness, and fully charged improvements. We investigate a possible next layer, GBG+S: a proposed system in which the \emph{original} GBG+ Player~0 remains the unique sovereign and may receive guarded gifts changing aspects of the operational system. This article does \emph{not} assume that a fixed formal GBG+S theory has been shown consistent, that its gifts are universally representable as mobility, or that any proposed gift is automatically admissible. Instead, we formulate explicit conditional preservation results for mixed move-and-gift histories, conservative proof-rule upgrades, bounded service fairness, and successor handoffs; prove a finite-gift settlement-transfer statement; exhibit counterexamples to careless claims; and identify specific existing theorems that a sovereign-gift semantics could generalize. The central proposed contribution is a theory of \emph{certified changes to the conditions of certified mathematical discovery}, rather than a grant of new mathematical truth by authority.
+\end{abstract}
+
+\textbf{Keywords:} GBG+S; GBG+; XYZ formal systems; mathematical self-improvement; automated theorem proving; AMLD; verifier succession; typed evidence; sovereign gifts; relative consistency.
+
+\section{The precise opportunity}
+The current corpus already connects legal game moves to partial unary inference rules, legal histories to finite proof traces, and proof-search control to the distinguished board-player of GBG+~\cite{GBG,GBGp}. An AMLD+0 architecture puts the five settlement roles $P,R,D,I,C$ under a Player-0 scheduler while retaining verifier-governed BANK admission~\cite{AMLD0}. A later discoverer paper separates theorem inheritance, inheritance of \emph{discovery methods}, and charged evidence of improved search~\cite{Successor}. These are actual research results and architectural definitions; none requires a sovereign who can rewrite the rules of the host game.
+
+GBG+S proposes asking a stronger question: \emph{What if the original Player~0 can be granted carefully delimited powers to revise the system in which the ATP or AMLD searches?} A revision might install a checked derived-rule macro, alter the schedule, change representation, delegate execution, or attempt a verifier succession. Some are plausible; others are forbidden or remain undecided in the current research protocol. The useful mathematics is therefore the \emph{boundary}: which properties must be preserved and what additional proof obligations appear when the rules themselves become state-dependent?
+
+The analogy with research conditional on the Riemann hypothesis is appropriate only with care. The working hypothesis is not that every imaginable sovereign action works. Rather, one seeks two distinct kinds of claims: a relative-consistency hypothesis, and theorems derived only after a particular gift contract has been formalized. For example, one may target statements of the form
+\begin{equation}\label{eq:conditional}
+\left[\Con(T_{+})\Rightarrow\Con(T_{S})\right]
+\quad\text{and}\quad
+\left[T_S+\mathcal H_g\right]\vdash\mathcal P_g,
+\end{equation}
+where $T_{+}$ is a \emph{specified} formal GBG+ theory, $T_S$ a \emph{specified} GBG+S extension, $\mathcal H_g$ an operational contract for a permitted gift, and $\mathcal P_g$ a preservation or improvement claim. Neither half of~\eqref{eq:conditional} has been proved in general merely by naming GBG+S. In particular, $\Con(T_S)$ does not entail that a given gift is authorized, that every certificate checker is sound, or that a self-revision has positive value. Structural existence, syntactic consistency, semantic soundness, and effective admission are different obligations.
+
+\section{A provisional sovereign-gift interface}
+\begin{definition}[Epoch configuration]\label{def:epoch}
+For this article only, a complete epoch is a record
+\[
+X_e=(Q_e,F_e,V_e,B_e,\sigma_e,A_e,C_e,H_e,S),
+\]
+where $Q_e$ contains the rule-complete ordinary search/game state and its resource ledger, $F_e$ is the object proof calculus, $V_e$ its versioned certificate-checking interface, $B_e$ a typed provenance-bearing BANK, $\sigma_e$ a legal service/control schedule, $A_e$ the authorization data, $C_e$ cumulative commitments and theory constraints, $H_e$ the authenticated history, and $S$ the \emph{unique original} GBG+ Player~0. A candidate gift is a partial transition $g:X_e\rightharpoonup X_{e+1}$ with declared changed coordinates and a checkable evidence packet whenever one is available. We distinguish ordinary legal player moves $X\xrightarrow{m}Y$ from activated gift transitions $X\xrightarrow{g,w}g(X)$. The latter occur only after the appropriate external admission gate is passed. A rejected or unresolved proposal may also produce an administrative audit-log update $X\xrightarrow{a}Y$; this is neither an activated gift nor a legal player move, and it cannot by itself complete a game.
+\end{definition}
+
+This is a \emph{proposed interface}, not a claim that these data and rules already constitute the finalized axioms of GBG+S. It is chosen to expose the obligations relevant to MVSI. In particular, a gift is not identical to an ordinary theorem-proving move; gifts may change the admissible next-move relation.
+
+The current sovereign-gift requirements are treated as constraints on any later formalization. A proposed gift is not presumed to be beneficial, and the availability of an ordinary move does not imply an unrestricted gift permission:
+\begin{enumerate}
+\item $S$ is the original GBG+ Player~0; delegated executors, copies, and promoted agents do not silently become additional sovereigns.
+\item Ordinary GBG+ obligations survive an authorized gift, and logical consistency is judged externally, not by $S$'s declaration.
+\item STOP rejects a gift incompatible with the \emph{cumulative} admitted history; an undetermined check never licenses activation.
+\item Permissions, provenance, prior commitments, and versioned certificate scopes are explicit. A proposed change of verifier is not automatically lawful.
+\item A completed game contains at least one actual legal player move (possibly by $S$). A zero-move STOP history is not reclassified as a completed game.
+\end{enumerate}
+A sound sufficient admission certificate need not be a complete decision procedure for consistency. Treating STOP as a uniformly terminating decider for arbitrary effectively presented first-order theories would contradict the general undecidability of their consistency problem. Thus \emph{rejection} supported by an incompatibility witness and \emph{withholding activation} because an obligation is unresolved are distinct outcomes. Neither is permission to proceed.
+
+\begin{definition}[Evidence-qualified admission]\label{def:admit}
+Relative to a fixed proposed contract $K$, write $\Adm_K(X,g,w)$ when an external checker accepts evidence $w$ for all declared obligations: authority, cumulative compatibility, the identities of rules and verifiers, dependency preservation, and the selected safety invariants. The claim that this gate is \emph{sound} is an independent hypothesis about the checker and what $w$ certifies; it does not follow from the gate returning an acceptance bit. A candidate for which no adequate evidence is presently available is \emph{not activated}. A failed proof search alone is not a proof of inconsistency.
+\end{definition}
+
+\section{Conditional preservation results}
+\begin{theorem}[Mixed-history sovereign-gift invariant preservation]\label{thm:invariant}
+Fix a transition contract $K$ and an invariant $I(X)$ on complete, versioned epoch configurations. Assume:
+\begin{enumerate}[label=(\roman*)]
+\item $I(X_0)$ for the initial configuration;
+\item every reachable ordinary player move $X\xrightarrow{m}Y$ and every audit-only step $X\xrightarrow{a}Y$ preserves $I$, whenever $I(X)$ holds;
+\item every activated gift $X\xrightarrow{g,w}Y$ satisfies $Y=g(X)$, has an admitted certificate $\Adm_K(X,g,w)$, and its sound transition obligation establishes
+\[
+I(X)\wedge\Adm_K(X,g,w)\Longrightarrow I(Y);
+\]
+\item every realized transition is one of these three kinds; unresolved or rejected proposals never activate a gift and any administrative logging is covered by (ii).
+\end{enumerate}
+Then $I$ holds after every finite legal mixed history of ordinary moves, audit-only updates, and activated gifts. This includes histories with schedule or proof-search changes satisfying the same obligations.
+\end{theorem}
+\begin{proof}
+Induct on the number of realized transitions, not merely on the number of gifts. The base case is (i). For an ordinary or audit-only step use (ii); for an activated gift use (iii); and (iv) excludes an unaccounted kind of state change. Thus every finite reachable configuration satisfies $I$. Nothing here proves the admission gate sound, the obligations decidable, or any candidate gift admissible.
+\end{proof}
+
+The theorem is elementary but architecturally consequential. It turns the phrase ``safe self-improvement'' into an explicit \emph{transition-preservation obligation}. A useful instance is the \emph{live-proof-checkability} invariant (assuming records contain a type tag):
+\begin{equation}\label{eq:ledger}
+I_{\rm proof}(X):\quad
+\forall r\in\Live(B_X),\ \operatorname{type}(r)=\mathsf{PROOF}\ \Longrightarrow\ 
+\exists p\;\bigl[V_X(p,r)=1\ \wedge\ \Prov_X(p,r)\bigr],
+\end{equation}
+\emph{together with} a separate assumption that the verifier is sound for its declared logic, hypotheses, and semantic scope. The witness $p$ must be checked against the record's own theory version and dependency context; if that version is no longer live, an archived record does not automatically qualify as a current premise. Without that soundness assumption, the mere existence of a checked string does not establish truth. Historical records may remain available with a changed status even when they can no longer be promoted as live mathematical premises.
+
+\begin{corollary}[Conservative derived-rule gift]\label{cor:macro}
+Suppose a separately admitted sovereign gift retains all axioms and rules of an object calculus $F$ and installs only sound, finitely replayable $F$-derived macro-rule schemata, with identical theorem language, hypotheses, and applicable side conditions. For the resulting $F'$,
+\[
+\Gamma\vdash_{F'}\varphi\quad\Longleftrightarrow\quad\Gamma\vdash_F\varphi.
+\]
+The gift can change the cost and accessibility of a proof without changing the set of derivable sentences.
+\end{corollary}
+\begin{proof}
+An $F$ proof is an $F'$ proof because old rules remain. Conversely, replace each macro step in a finite $F'$ proof by its checked finite $F$ expansion. This reproduces the established conservative derived-rule compilation argument of~\cite{Successor}; the sovereign layer adds authorization and upgrade-history obligations, not a new proof of the compilation result. In particular, this corollary alone proves neither that such a gift is available in GBG+S nor that $T_S$ is consistent.\end{proof}
+
+\begin{remark}[No cost guarantee]
+Conservativity does not entail a faster machine. Proposal generation, proof checking, installation, transport, memory, and future search must all be charged. The successor-discoverer paper gives a stronger break-even criterion under conditional per-episode bounds~\cite{Successor}. For old lower bounds $\ell_i$, new upper bounds $q_i$, and a bound $B$ on all one-time additional expenses, an improvement follows if
+\[
+\sum_{i=1}^{N}(\ell_i-q_i)>B.
+\]
+The inequality is useful only if its bounds are themselves justified under all declared caching, reuse, and adaptation options.
+\end{remark}
+
+\begin{remark}[A tiny ATP instance]
+Let $F$ have the unary rule $P(t)\Rightarrow P(f(t))$. A candidate macro $P(t)\Rightarrow P(f(f(t)))$ expands into two old steps. A checked installation conserves derivability, while it may reduce one class of search traces from two online steps to one. Whether it actually saves complete charged cost depends on the installation expense, replay/checking charges, repeated workload, and the old comparator's permitted caching. It is a \emph{conditional example}, not an admitted GBG+S gift or an observed speedup.
+\end{remark}
+
+\section{The clock-rewrite test: an actual AMLD consequence}
+The \emph{Fundamental Theorem of Round-Robin AMLD Settlement} establishes eventual certified settlement when a finite settlement history is available under the paper's exact history compilation and \emph{inner branch-covering} fairness assumptions~\cite{RoundRobin}. Its outer round-robin condition prevents inter-role starvation; it is not by itself enough to ensure every search branch is explored. GBG+S clock gifts must respect both distinctions.
+
+A tempting but false claim is that every locally ``fair'' replacement schedule preserves global nonstarvation. The following is an abstract re-planning counterexample, \emph{not} a claim that such rewrites are admissible in a finalized GBG+S theory. Consider two always-enabled agents $P_1,P_2$. At each turn the sovereign announces a fair infinite continuation that serves $P_1$ now and $P_2$ next, but replaces that schedule before the next service. The realized infinite execution serves $P_1$ at every turn. Every announcement has a fair tail, while the actual history starves $P_2$.
+
+\begin{lemma}[Uniform service-debt preservation]\label{lem:debt}
+Suppose an infinite execution has a fixed finite roster of ordinary players, each continuously enabled after some finite time. Suppose one uniform integer $b\ge 1$ holds across \emph{all} sovereign schedule rewrites: for each such player, every block of $b$ consecutive \emph{realized} ordinary service turns after its time of permanent enablement serves that player at least once. Then no such player is starved, regardless of the number of schedule rewrites.
+\end{lemma}
+\begin{proof}
+For each player, discard the finite prefix before its permanent enablement. Partition the remaining infinite service trace into consecutive length-$b$ blocks. That player appears in every block by hypothesis and hence infinitely often. The proof uses the realized trace, not a promise about an abandoned future schedule.\end{proof}
+
+A finite counter-based controller can be designed to enforce the block guarantee for finite rosters, if the legal scheduler always has an admissible service action before any debt ceiling is breached. That is a \emph{separate implementability condition}. Even global nonstarvation is insufficient for the branch-covering hypothesis of~\cite{RoundRobin}; a full sovereign settlement-preservation theorem must retain appropriate coverage within each role.
+
+\begin{theorem}[Finite-gift settlement transfer under retained reachability]\label{thm:settlement}
+Let an initial effective, verifier-gated AMLD configuration $X_0$ have a finite legal history leading to a certified settlement of a fixed target $T$. Suppose an actual execution contains only finitely many activated gifts. Assume that every realized transition up to and including the last gift preserves the property
+\[
+R_T(X):\quad \text{there exists a finite legal, certificate-accepted settlement history from $X$},
+\]
+where preservation includes a checked translation if the certificate or state language changes. After the last gift, assume the resulting fixed AMLD epoch satisfies all hypotheses of the Fundamental Theorem of Round-Robin AMLD Settlement, including exact history compilation, verifier-backed settlement, and the \emph{inner} branch-covering fairness condition. Then the actual search eventually settles $T$ with an accepted certificate.
+\end{theorem}
+\begin{proof}
+If settlement has already occurred, there is nothing to show. Otherwise, induction on the finite transition prefix ending at the last gift carries $R_T$ from $X_0$ to the start of the final stable epoch. The cited AMLD completeness theorem then gives eventual accepted settlement under its explicitly assumed branch-covering search. The argument provides no bound on completion time and no speedup. It does not apply to arbitrarily many rewrites, to an ordinary step destroying the last settling path, or to an epoch that loses branch coverage.
+\end{proof}
+
+The reachability-transport premise is substantive: a rule change may remove the only settling path even while its verifier remains sound. Similarly, endlessly alternating individually admissible schedule changes requires an execution-level fairness proof, not merely this finite-gift theorem.
+
+\section{Verifier succession is the sharper boundary}
+In \emph{Graduation Is Epistemic Handoff}, the Verifier-Sovereignty Theorem holds when graduate guidance or Player-0 control changes search but leaves all required verifiers and their acceptance rules unchanged~\cite{Graduation}. DATA MIND 3.0 likewise separates heuristic and operational intelligence from the mathematical authority of verifier-accepted evidence~\cite{DataMind}. The extension to a sovereign who may be \emph{offered} a verifier change is not automatic.
+
+\begin{question}[Verifier-succession transport]\label{q:verifier}
+Given verifiers $V_e,V_{e+1}$ for potentially differing proof interfaces, can we exhibit a computable, checked proof translator $\tau_e$, a statement/context translator $\theta_e$, and a declared truth-preserving semantic relation such that every retained \emph{source-qualified} proof $p$ passes a sound target check,
+\[
+V_e(p,\Gamma_e\vdash\varphi)=1\quad\Longrightarrow\quad
+V_{e+1}(\tau_e(p),\theta_e(\Gamma_e)\vdash\theta_e(\varphi))=1,
+\]
+with the translated hypotheses genuinely licensed in the successor, correct provenance, scope, and dependencies, and independently justified soundness of $V_{e+1}$? Under what contract may this constitute a sovereign gift?
+\end{question}
+
+The displayed formula is a \emph{desired bridge obligation}, not a general theorem. In particular, verifier succession is an unresolved atomic candidate in the current GBG+S investigation; unguarded verifier rewriting is not thereby accepted. Replacing a verifier with an accept-all program demonstrates the hazard: a new program may accept a false sentence without making that sentence true. Consistency of a formal description of the controller does not supply semantic soundness of its certificates.
+
+\begin{proposition}[Conditional live-certificate transport]\label{prop:transport}
+Suppose a proposed handoff has a finite, acyclic, dependency-closed set of live source proof records. For each retained record, assume (i) its source proof and exact hypotheses are checked, (ii) a computable translator produces a target proof accepted by the successor's sound checker from appropriately authorized translated hypotheses, and (iii) the translated record retains its scope, dependencies, and provenance. Then every such migrated record may be designated as a \emph{target-qualified} live proof record without treating the sovereign's assertion as a proof. Source records lacking these witnesses must not be promoted on the strength of this proposition.
+\end{proposition}
+\begin{proof}
+Order the finite, acyclic dependency graph so that prerequisites precede dependents. Check translated roots against the authorized successor context, then translated records in that order. Assumption (ii) supplies a valid target certificate at each step, and (iii) preserves the context and dependency binding. Soundness of the successor checker is an independent premise. No conclusion follows for records outside the translated, dependency-closed set.
+\end{proof}
+
+This distinction also sharpens a concept from \emph{What Survives the Successor?}: preserving old proof receipts is weaker than preserving the \emph{method} by which the predecessor generates new candidates~\cite{Successor}. A sovereign handoff worthy of MVSI should specify a proof translation, an executable trace translation, resource accounting, and a rollback or historical-status rule when evidence cannot be transferred.
+
+\section{Applications to ATP and AMLD self-improvement}
+\begin{enumerate}[label=\arabic*.,leftmargin=1.8em,itemsep=0.45em]
+\item \textbf{Conservative derived-rule compilation and charged break-even}~\cite{Successor}. Can an ATP-generated, checked macro be lawfully installed while preserving old proof access and charging all proposal, checking, installation, and search costs?
+\item \textbf{AMLD+0 Passive-Rewiring Theorem}~\cite{AMLD0}. Does a sovereign-controlled AMLD admit a certified projection back to the original five-role machine when sovereign gift authority is not used?
+\item \textbf{Fundamental Round-Robin AMLD Settlement}~\cite{RoundRobin}. Which combinations of realized service fairness, inner branch coverage, and reachability transport survive clock gifts? Which instances satisfy Theorem~\ref{thm:settlement}?
+\item \textbf{Verifier-Sovereignty Theorem}~\cite{Graduation}. Under which additional permissions and translations, if any, can verifier succession preserve accepted evidence without promoting authority into purported mathematical truth?
+\item \textbf{Type-safe dreaming and waking}~\cite{Dreaming}. Which gifts let evidence survive waking, changed roles, copied executors, and versioned BANK updates without turning an AUDIT or EVAL record into a PROOF record?
+\item \textbf{XYZ/GBG structural encoding}~\cite{GBG,GBGp}. Can provisional MOBILITY and GRANT gifts, kept logically distinct, be encoded as finite paths without creating a second sovereign?
+\end{enumerate}
+
+These are \emph{test cases}, not six consequences already derived from GBG+S. They provide falsifiable obligations and minimal countermodels. For example, a gift preserving a certificate checker but violating inner branch coverage can break eventual settlement despite never accepting a false theorem. A gift preserving all logical theorems but losing a successor's candidate-generation procedure can fail the goal of continued self-improvement.
+
+\section{Does a fragment of XYZ explain the sovereign layer?}
+The GBG formalization encodes complete game states as well-formed objects and legal moves as partial unary inference rules inside an $XYZ$ formal system $F=(x,y,z)$~\cite{GBG,GBGp}. The GBG+ foundation already provides an explicit \emph{passive} extension $E$ and projection $U$ satisfying $U\circ E=\mathrm{id}$ on ordinary GBGs~\cite{GBGp}. This is a structural preservation result, not an automatic syntactic consistency theorem for a sovereign theory.
+
+The proposed next step is to ask whether \emph{active, admissible} GBG+S histories have a faithful rule-complete $XYZ$ encoding. The retained \emph{MOBILITY} and \emph{GRANT} candidates remain provisionally defined; a composite GRANT+MOBILITY is not the same as assuming that S already possesses mobility. If the ordinary inference rules themselves can be rewritten, the encoded complete state must include their current version and the gift-admission protocol. A faithful encoding must preserve unique $S$, cumulative constraints, authorization, the distinction between proposal and installation, observable effects, and the legal-move relation. If a legal gift has an effect that cannot be represented by a finite path of such complete states, the universal representation conjecture fails in that formulation.
+
+One possible semantic target is a model construction
+\[
+E_S:\operatorname{Mod}(T_+)\longrightarrow\operatorname{Mod}(T_S)
+\quad\text{with}\quad
+U_S(E_S(M))\cong M.
+\]
+Constructing a suitable $E_S$ under fixed axioms would support a semantic relative-consistency implication. The existence of the forgetful map $U_S$ alone would \emph{not} establish it. Any syntactic consistency conclusion also requires a specified proof calculus and a justified connection between syntactic and semantic claims.
+
+A distinct long-range objective concerns elementary equivalence: two richer models might induce elementarily equivalent GBG-related \emph{reducts} while disagreeing about a statement not expressible in that reduct language. This would be an expressibility result, not automatically an independence theorem. In particular, two elementarily equivalent models in the full first-order language of set theory cannot disagree on GCH. This distinction prevents a tempting but invalid shortcut.
+
+\section{A finite-first research program}
+A productive first experiment needs no promise that every gift exists. It requires one \emph{fixed} GBG+S candidate contract and a small fully enumerated machine. The following order prioritizes the proposed mobility representation rather than assuming its truth:
+\begin{enumerate}
+\item \textbf{Freeze the formal layer.} Specify $T_+$, the candidate $T_S$, the exact game/XYZ language, and the difference between ordinary moves and gifted changes. Do not substitute a slogan for axioms.
+\item \textbf{Prove or refute model existence.} Construct a passive sovereign extension first, then add one concrete gift. Separate structural nonemptiness from the target $\Con(T_+)\Rightarrow\Con(T_S)$.
+\item \textbf{Test mobility first.} Define one legal MOBILITY transition on complete $XYZ$ configurations and, separately, the authority contract for any GRANT+MOBILITY composite. Require uniqueness of $S$, observable faithfulness, a legal ordinary move for completed games, and external cumulative consistency obligations. Record whether the model exists.
+\item \textbf{Then test a macro gift.} Use a tiny ATP with a decidable checker, one new finitely replayable derived rule, and an exact charged ledger. Verify old proof preservation and compare charged search reach against a specified baseline. Do not assume the gift is authorized simply because the macro is conservative.
+\item \textbf{Then test a clock gift.} Use a finite AMLD surrogate with roles $P,R,D,I,C$, explicit service debts, and a branch enumeration policy. Exhibit the re-planning starvation counterexample and verify a stronger invariant.
+\item \textbf{Stress proof transport.} Make a deliberately invalid checker upgrade, require STOP to reject activation on sufficient evidence, and preserve a trace of the rejected attempt without crediting it as a completed game.
+\item \textbf{Audit the resulting claims.} Record exact hypothesis scopes, executable transitions, proof witnesses, countermodels, costs, and unproved obligations. Distinguish finite checks from universal theorems.
+\end{enumerate}
+The program should also permit noncooperative games and legal sovereign acts that fail to improve performance. The goal is not to engineer improvement into every definition, but to characterize exactly when verifiable improvement is possible.
+
+\section{Conclusion}
+The distinctive contribution GBG+S \emph{could} make to MVSI is not unlimited sovereign power. It is an explicit mathematical treatment of revisions to the machinery that discovers, checks, remembers, schedules, and inherits proofs. Existing GBG+, AMLD, and ATP research already provides the baseline theorems. The sovereign layer asks which of these theorems remain invariant under authorized changes of the game itself, and what new obligations such changes create.
+
+The nearest useful results are modest but precise: mixed legal histories preserve an invariant when \emph{both} ordinary moves and certified gifts preserve it; and eventual AMLD settlement survives finitely many gifts only under explicit reachability transport and a final branch-covering regime. The substantial open work is to \emph{construct} interesting gifts satisfying this requirement, show that their controls have a consistent model, preserve the exact old proof and discovery methods that matter, and demonstrate a fully charged improvement. In this sense, GBG+S may become a mathematics of \emph{certified succession of mathematical discovery systems}; it is not yet such a completed theory.
+
+\section*{Status and attribution}
+This manuscript is an AI-assisted exploratory research draft prepared for the research director and subjected to an internal mathematical and document audit. The mixed-history invariant theorem, service-debt lemma, finite-gift settlement-transfer theorem, and conditional certificate-transport proposition are proved here from explicit assumptions; they do not prove the relative consistency of GBG+S. All global GBG+S claims, verifier-succession permissions, and universal XYZ-mobility representation remain open unless independently established. The listed earlier papers are primary sources for the \emph{existing} results, not endorsements of the proposed extension. No external peer review or formal proof-assistant verification is claimed.
+
+\begin{thebibliography}{99}\footnotesize
+\bibitem{GBG} B. Tenneson, \emph{Generalized Board Games: From Tic-Tac-Toe to Chess as XYZ Formal Systems}, September 22, 2026. \url{https://btenneson.github.io/pub/cs.LO_Logic_in_Computer_Science/generalized_board_games_tic_tac_toe_chess_001/}
+\bibitem{GBGp} B. Tenneson, \emph{Generalized Board Games and GBG+: A Self-Contained Formal Foundation with the Board as a Player}, September 26, 2026. \url{https://btenneson.github.io/pub/cs.LO_Logic_in_Computer_Science/gbg_and_gbg_plus_formal_foundations_004/}
+\bibitem{AMLD0} B. Tenneson, \emph{AMLD+0: Lineage and Foundational Architecture}. \url{https://btenneson.github.io/pub/cs.LO_Logic_in_Computer_Science/amld_plus_0_part_i_section_1_lineage_and_foundational_architecture/}
+\bibitem{RoundRobin} B. Tenneson, \emph{Fundamental Theorem of Round-Robin AMLD Settlement: Finite-Settlement Completeness, GBG Reachability, CSG Horizons, and the No-Uniform-Deadline Boundary}, September 22, 2026. \url{https://btenneson.github.io/pub/cs.LO_Logic_in_Computer_Science/fundamental_theorem_round_robin_amld_settlement_002/}
+\bibitem{Successor} B. Tenneson, \emph{What Survives the Successor? The Self-Improving Mathematical Discoverer}. \url{https://btenneson.github.io/pub/cs.LO_Logic_in_Computer_Science/what_survives_the_successor_discoverer_atlas_v2/}
+\bibitem{Graduation} B. Tenneson, \emph{Graduation Is Epistemic Handoff: Information, Graduate Players, and Verifier-Gated Control in GBG+}. \url{https://btenneson.github.io/pub/cs.LO_Logic_in_Computer_Science/graduation_is_epistemic_handoff_v1_1/}
+\bibitem{Dreaming} B. Tenneson, \emph{Cooperative GBG+ Dreaming in a Singleton ATP}. \url{https://btenneson.github.io/pub/cs.LO_Logic_in_Computer_Science/cooperative_gbg_plus_dreaming_w0_glossaries/}
+\bibitem{DataMind} B. Tenneson, \emph{DATA MIND 3.0: A Verifier-Gated Architecture for Mathematical Search, Discovery, Learning, Installation, and Safe Upgrade}. \url{https://btenneson.github.io/pub/cs.AI_Artificial_Intelligence/data_mind_3_0/}
+\end{thebibliography}
+\end{document}
