@@ -14,6 +14,7 @@ To open Chrome specifically rather than the Windows default browser, paste `http
 
 ## Search and privacy details
 
+- Numerical ratings are reserved for private editorial work under root `ratings/`, not displayed to library readers.
 - The catalog searches PDF **titles and summaries**; it is not full-text passage search.
 - Meaning-based search optionally loads an open embedding model over the network when used. To keep the viewer fully offline, don't use that optional feature.
 - The 48 available PDF links point to the files in your local extracted copy. They no longer open GitHub's folder UI.
