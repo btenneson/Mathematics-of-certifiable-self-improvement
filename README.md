@@ -6,11 +6,11 @@ This research collection studies proof-carrying revision, costed self-improvemen
 
 ## Library navigation
 
-- [Research catalog and 2D ratings](docs/index.html) — 48 PDFs, with research rating and relevance to AI improvement.
+- [Research catalog and full manuscript reader](docs/index.html) — 48 PDFs, searchable by title and category, each with a full-page viewer and separate download link.
 - [Core theory W0–W3](docs/theory.html) and [the theory guide](core/CORE_THEORY_GUIDE.md).
 - [Finite browser lab](docs/lab.html) — illustrative costed-game / quotient / receipt examples.
 - [Meaning-based search](docs/semantic-search.html) — optional on-device title-and-summary embeddings, not full-text PDF semantics.
-- [2D ratings CSV](ratings/AI_Self_Improvement_2D_Ratings.csv).
+- [Internal editorial 2D ratings CSV](ratings/AI_Self_Improvement_2D_Ratings.csv) — private working scores, deliberately absent from the reader-facing site.
 - [Curated originals](library/) — four thematic series with their original filenames retained.
 - [Missing-source checklist](MISSING_FILES.md) — seven text/source records still awaiting upload.
 
@@ -31,7 +31,7 @@ The `FORGE-6` materials are **historical research records**, not an active deplo
 
 ## Private repository, publicly readable website
 
-The requested arrangement is a **private GitHub source repository with a publicly accessible GitHub Pages site**. The `docs/` website now includes the research files and 2D ratings needed to display them through GitHub Pages. Do not change repository visibility. See [Pages activation instructions](DEPLOY_GITHUB_PAGES.md). Publishing from a private repository requires a GitHub Pro, Team, or Enterprise plan; GitHub Free cannot activate this Pages arrangement.
+The requested arrangement is a **private GitHub source repository with a publicly accessible GitHub Pages site**. The `docs/` website now includes the research files and the full-document reader needed for GitHub Pages. Do not change repository visibility. See [Pages activation instructions](DEPLOY_GITHUB_PAGES.md). Publishing from a private repository requires a GitHub Pro, Team, or Enterprise plan; GitHub Free cannot activate this Pages arrangement.
 
 ## Optional local Chrome preview on Windows
 
@@ -41,12 +41,12 @@ The requested arrangement is a **private GitHub source repository with a publicl
 2. In Windows File Explorer, choose **Extract All** (do not open from inside the ZIP).
 3. Open the extracted folder and double-click **OPEN_PRIVATE_LIBRARY_WINDOWS.bat**. This launches a local website in Chrome or your default browser.
 
-If Python is available, the launcher starts a small HTTP server bound only to `127.0.0.1` (your laptop), at `http://127.0.0.1:8765/docs/`. If Python is not available, it opens `docs/index.html` as a local file. In that fallback mode, the library catalog, original PDFs, ratings and finite lab are available; optional semantic search requires an HTTP server and an additional model download.
+If Python is available, the launcher starts a small HTTP server bound only to `127.0.0.1` (your laptop), at `http://127.0.0.1:8765/docs/`. If Python is not available, it opens `docs/index.html` as a local file. In that fallback mode, the library catalog, full PDF reader, original PDFs and finite lab are available; optional semantic search requires an HTTP server and an additional model download.
 
 All document links are **relative links into the website's `docs/library` folder**, working both online through Pages and in local preview. The catalog includes 48 available PDFs. Seven supporting text/source files are still missing from the curated selection. [Private viewer setup](PRIVATE_PREVIEW.md).
 
 ## Research-status boundaries
 
-Scores are **provisional editorial assessments** and not peer review. Manuscript-level proof claims, finite sanity checks, independent formal certification, and real-world machine improvements are distinct. The Python checker in `library/04_Protocols_and_Research_Records/Finite_Example_Checks/` contains seven finite examples and does not validate the general program. Browser examples are likewise illustrative. Ordinary catalog search runs without external services; semantic search optionally downloads an open model from a third-party CDN. **Full-PDF passage indexing has not yet been installed.**
+Internal scores are **provisional editorial assessments**, not peer review, and are not displayed to readers. If the entire repository is later made public, remove the internal scorecard first if it should stay private. Manuscript-level proof claims, finite sanity checks, independent formal certification, and real-world machine improvements are distinct. The Python checker in `library/04_Protocols_and_Research_Records/Finite_Example_Checks/` contains seven finite examples and does not validate the general program. Browser examples are likewise illustrative. Ordinary catalog search runs without external services; semantic search optionally downloads an open model from a third-party CDN. **Full-PDF passage indexing has not yet been installed.**
 
 Historical paths have been moved into `library/` while preserving the Git commit history. No original PDF contents were edited in the reorganization.
