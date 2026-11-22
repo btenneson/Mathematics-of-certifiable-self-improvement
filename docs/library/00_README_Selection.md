@@ -31,3 +31,7 @@ Many source ZIP entries were duplicate copies. Earlier historical drafts were se
 **Verification qualification:** source documents contain claims of differing maturity. A working note, proposed theorem, toy finite test, or a manuscript-level argument is **not** independently certified simply by inclusion. The retained source bytes are unchanged; the SHA-256 hashes and original paths are listed in the selection manifest.
 
 **Research history:** no original source was deleted or modified in the supplied archive. This is a separately generated focused copy. Consult the source archive if early revision history is required.
+
+## Post-curation library additions (not included in the 2026-11-17 source archive totals)
+
+On November 21, 2026, the audited 72-page `From_the_Boring_Game_to_the_Last_Gift_Expanded_Tenneson1_Braid_001(1)v2.pdf` and editable `From_the_Boring_Game_to_the_Last_Gift_Expanded_Tenneson1_Braid_001(1)v2.tex` were placed in featured slot 1. The previous two pinned articles remain available in slots 2 and 3. The manuscript explicitly remains an unfinished research program; unrestricted GBG+S relative consistency is not established. The original selection counts and SHA manifest above describe only the historic November 17 source archive and have not been retroactively altered.
