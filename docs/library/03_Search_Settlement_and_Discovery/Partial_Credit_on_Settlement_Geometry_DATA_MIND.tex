@@ -1,0 +1,1199 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=0.88in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{construction}[theorem]{Construction}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{researchnote}[theorem]{Research Note}
+\newtheorem{warningnote}[theorem]{Warning}
+
+\newcommand{\PC}{\operatorname{PC}}
+\newcommand{\awa}{\operatorname{awa}}
+\newcommand{\lev}{\operatorname{lev}}
+\newcommand{\VOA}{\operatorname{VOA}}
+\newcommand{\Reg}{\operatorname{Reg}}
+\newcommand{\BANK}{\mathsf{BANK}}
+\newcommand{\FUTUREBANK}{\mathsf{FUTUREBANK}}
+\newcommand{\Cert}{\operatorname{Cert}}
+\newcommand{\Cn}{\operatorname{Cn}}
+\newcommand{\Th}{\operatorname{Th}}
+\newcommand{\Cost}{\operatorname{Cost}}
+\newcommand{\Proof}{\operatorname{Proof}}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\settle}{\operatorname{Settle}}
+\newcommand{\marg}{\operatorname{MV}}
+\newcommand{\dom}{\operatorname{Dom}}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\lhead{Partial Credit on Settlement Geometry}
+\rhead{Tenneson, 3 September 2026}
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+\setlist[itemize]{leftmargin=1.5em,itemsep=2pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=2pt,topsep=3pt}
+
+\title{\textbf{Partial Credit on Settlement Geometry}\\[5pt]
+\large Proof Compass, Mathematical Capital, Directed Awareness, and Marginal Resource Allocation in DATA MIND}
+\author{Brian Tenneson\\
+\small Formalization, synthesis, and \LaTeX\ assistance: OpenAI ChatGPT (GPT-5.6 Sol)}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This theory note develops a unified account of partial credit, proof-search geometry, formal awareness, and multi-agent resource allocation for DATA MIND. The starting point is the existing transaction-geometric partial-credit form
+\[
+\PC(A\mid c)=\alpha q_c(A)+(1-\alpha)e^{-H_c(A)/h},
+\]
+where $q_c(A)$ measures target-relevant verified structure already present and $H_c(A)$ is a repair horizon to certified completion. The first synthesis is conditional but exact: when the Professor and Proof Compass use the same legal transition graph and cost convention, the Professor horizon is the Compass distance-to-settlement. The exponential term is therefore a bounded coordinate on Compass geometry. Reparameterizing it by a repair half-distance $H_{1/2}=h\ln 2$ gives
+\[
+R(A)=2^{-H(A)/H_{1/2}},
+\]
+so every additional repair half-distance halves the repairability coordinate.
+
+The second synthesis is that partial credit should not be treated as a single primitive score. The natural state is two-dimensional,
+\[
+\Pi_X(A)=(q_X(A),H_X(A)),
+\]
+with $q_X$ representing active verified mathematical capital and $H_X$ representing settlement geometry for role $X\in\{P,R,I,C\}$. This yields a Pareto theory of progress, an exact investment criterion for moves that gain verified structure while temporarily worsening geometric proximity, and an interpretation of $\alpha$ as an exchange rate between mathematical capital and immediate repairability rather than as a merely arbitrary weight.
+
+The third synthesis uses the directed formal-awareness quantity $\awa(M,N)$. Self-awareness is the diagonal $\lev(M)=\awa(M,M)$, while partner-awareness such as $\awa(X_1,X_2)$ is an off-diagonal, budgeted control resource. It should not itself earn mathematical partial credit. Instead, bounded partner-awareness can improve division of labor, detect duplication, preserve strategic diversity, and support marginal-value allocation. This leads to a value-of-awareness quantity that explicitly charges the cost of acquiring information about another agent.
+
+The final conclusion is architectural. DATA MIND's global control problem is not one monolithic proof-search optimization. It is constrained multi-agent marginal-value allocation over a changing settlement geometry. The proposed remedy is hierarchical: verifier and security constraints first; local agent search second; a small set of interpretable strategic proposals third; Pareto pruning, duplication adjustment, and cost-aware allocation last. The note ends with a minimal controller research program and falsifiable experiments. It is a theory note, not a claim that these extensions are already wired into the frozen DATA MIND 3.1 runtime.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Status, provenance, and scope}
+
+This note is a synthesis of several existing strands in the supplied Tenneson research corpus: Proof Compass geometry~\cite{compass}, transaction-geometric partial credit~\cite{partialcredit}, quotient proof geometry~\cite{quotient}, consequence-preserving presentation trading~\cite{trading,tradingdensity}, controlled formal awareness~\cite{awareness}, and the frozen DATA MIND 3.1 architecture~\cite{snapshot}. It also develops new elementary propositions and new architectural proposals that emerged by putting those strands together.
+
+Three labels are used throughout.
+\begin{itemize}
+\item \textbf{Source-derived} means the concept or result is already present in a cited manuscript or frozen architecture snapshot.
+\item \textbf{Derived here} means the statement follows mathematically from source-derived definitions by an explicit proof given in this note.
+\item \textbf{Proposed here} means the statement is a research design, operational interpretation, or empirical hypothesis. It is not silently presented as an already-frozen DATA MIND 3.1 rule.
+\end{itemize}
+
+This note does not perform a prior-art audit. A theorem label below means only that the stated conclusion follows from the stated assumptions. It does not by itself imply novelty. Likewise, no runtime speedup is inferred merely from a mathematical equivalence, quotient, trade, or awareness relation.
+
+The frozen DATA MIND 3.1 snapshot remains authoritative until a later user-approved amendment is explicitly created. In particular, the frozen snapshot currently assigns operational self-awareness and Professor smooth partial credit to each subscript-1 agent $X_1$ and not to $X_2$. Discussion below of symmetric Professor feedback is an experimental design proposal, not a silent change to that snapshot.
+
+\section{The problem hidden inside partial credit}
+
+A verifier answers a binary mathematical question. For a submitted certificate $A$ in context $c$,
+\[
+\Cert_c(A)\in\{0,1\}.
+\]
+This is the correctness boundary. A rejected proof attempt is not a partly true theorem, but it may contain verified premises, valid transformations, proved lemmas, discharged obligations, or a strategy that is close to repair.
+
+The existing transaction-geometric proposal separates those facts into two conceptual terms:
+\[
+\boxed{
+\PC(A\mid c)=\alpha q_c(A)+(1-\alpha)e^{-H_c(A)/h}
+}
+\]
+with $0\le \alpha\le 1$ and $h>0$. Here $q_c(A)\in[0,1]$ represents target-relevant verified structure already present, while $H_c(A)$ is a repair horizon to the set of certified completions under a declared set of legal repair transactions and costs.
+
+At first sight this looks like a single grading formula. The main claim of this note is that the apparent simplicity is deceptive. The formula sits at the intersection of at least four distinct structures:
+\begin{enumerate}
+\item a verifier-defined settlement set;
+\item a directed weighted geometry of legal proof/search transitions;
+\item a ledger of verified mathematical capital;
+\item a controller that decides whether the next unit of computation should descend, invest, diversify, transfer, transform, or acquire awareness.
+\end{enumerate}
+
+The correct objective is therefore not to make the formula more complicated. It is to preserve the separation of these structures while identifying the exact mathematical bridges among them.
+
+\section{Settlement geometry and role-specific terminal sets}
+
+Fix a settlement role
+\[
+X\in\{P,R,I,C\},
+\]
+where $P$ denotes proof of the target, $R$ refutation or proof of the negation, $I$ certified formal independence, and $C$ certified contradiction or background inconsistency.
+
+\begin{definition}[Role-specific settlement graph]
+Let
+\[
+G_X=(S_X,E_X,w_X)
+\]
+be a directed weighted graph of legal search states and legal transitions for role $X$, with nonnegative edge cost $w_X$. Let
+\[
+C_X\subseteq S_X
+\]
+be the states carrying a verifier-accepted $X$-certificate. Define
+\[
+H_X(A)=d_{G_X}(A,C_X)
+=\inf\{\Cost(\pi):\pi\text{ is a legal path from }A\text{ to }C_X\},
+\]
+with $H_X(A)=\infty$ if no such path exists.
+\end{definition}
+
+This is the weighted form of the Proof Compass distance-to-settlement idea. When all legal edges have unit cost, an exact Compass follows a shortest path by choosing a successor whose horizon decreases by one. In the weighted case the Bellman relation is
+\[
+H_X(A)=\min_{A\to B}\{w_X(A,B)+H_X(B)\}
+\]
+whenever the minimum is attained.
+
+\begin{remark}[Global versus role-specific settlement]
+A global settlement set can be written
+\[
+C_{\mathrm{all}}=C_P\cup C_R\cup C_I\cup C_C,
+\qquad
+H_{\mathrm{all}}(A)=d(A,C_{\mathrm{all}}).
+\]
+For the Professor, however, role-specific horizons are often conceptually cleaner. A proof agent should not receive high proof partial credit merely because its state is close to a refutation certificate. Whether DATA MIND 3.1 ultimately uses role-specific Professor horizons or one global settlement horizon remains a design choice to be frozen explicitly.
+\end{remark}
+
+\section{Compass--Professor identification}
+
+The Professor paper and Compass paper originally introduce geometries from different motivations. The key observation is that no second geometry is needed if the legal state transitions and costs are the same.
+
+\begin{theorem}[Conditional Compass--Professor identification]
+Suppose the Professor's repair-attempt space for role $X$ and the Proof Compass search space for role $X$ have the same states, the same legal directed transitions, the same edge costs, and the same verifier-defined terminal set $C_X$. Then the Professor repair horizon and the Compass distance-to-settlement coincide:
+\[
+\boxed{H_X^{\mathrm{Prof}}(A)=d_{C_X}^{\mathrm{Compass}}(A).}
+\]
+\end{theorem}
+
+\begin{proof}
+Both quantities are defined as the infimum of the same path-cost functional over the same family of legal paths from $A$ to the same terminal set $C_X$.
+\end{proof}
+
+\begin{remark}
+This theorem is conditional. If the Professor is permitted repair transactions that the live search engine cannot perform, or if the cost conventions differ, then the two horizons are different objects. The identification must therefore be a frozen interface decision, not an informal analogy.
+\end{remark}
+
+When the identification holds, the division of labor becomes crisp:
+\[
+\begin{array}{ll}
+\text{Proof Compass:} & \text{Which successor best descends settlement geometry?}\\[2mm]
+\text{Professor:} & \text{How much progress does the present state represent?}
+\end{array}
+\]
+The geometry is shared; the use of the geometry is different.
+
+\section{Repairability as an exponential Compass coordinate}
+
+Define the Professor repairability term
+\[
+R_X(A)=e^{-H_X(A)/h_X},\qquad h_X>0.
+\]
+The Compass literature also interprets $-H_X$ as a stopped Abel/Lyapunov coordinate. The Professor exponential is therefore a bounded nonlinear reparameterization of the same geometric coordinate.
+
+\begin{proposition}[Exponential coordinate]
+For finite $H_X(A)$,
+\[
+\boxed{R_X(A)=e^{-H_X(A)/h_X}}
+\]
+is strictly decreasing in $H_X(A)$, satisfies $R_X(A)=1$ at settlement, and tends to $0$ as $H_X(A)\to\infty$. Moreover,
+\[
+H_X(A)=-h_X\log R_X(A).
+\]
+Thus $R_X$ and $H_X$ contain the same exact information when $H_X<\infty$.
+\end{proposition}
+
+\begin{proof}
+Immediate from monotonicity and invertibility of the exponential on $\R$.
+\end{proof}
+
+\subsection{Repair half-distance}
+
+The supplied multi-dose concentration manuscript~\cite{halflife} uses the standard half-life reparameterization
+\[
+e^{-(\ln 2)t/h}=2^{-t/h}.
+\]
+For proof geometry, define a \emph{repair half-distance}
+\[
+\boxed{H_{1/2,X}=h_X\ln 2.}
+\]
+Then
+\[
+\boxed{R_X(A)=2^{-H_X(A)/H_{1/2,X}}.}
+\]
+Every additional repair half-distance cuts the repairability coordinate in half.
+
+\begin{remark}[Analogy, not ontology]
+The half-life paper supplies a useful exponential coordinate system. It does not imply that theorem proving obeys a pharmacokinetic differential equation. Verified mathematics does not physically decay. The analogy is limited to the mathematics of an exponential response to a distance variable.
+\end{remark}
+
+\section{Compass regret and the dynamics of repairability}
+
+Let $A\xrightarrow{c}B$ be a legal transition of cost $c\ge0$. For an exact horizon define one-step Compass regret by
+\[
+\boxed{\Reg_X(A,B)=c+H_X(B)-H_X(A).}
+\]
+The Bellman inequality gives $\Reg_X(A,B)\ge0$, with equality exactly when the edge begins a shortest continuation.
+
+\begin{theorem}[Repairability transport law]
+For every legal finite-horizon transition $A\xrightarrow{c}B$,
+\[
+\boxed{
+\frac{R_X(B)}{R_X(A)}
+=
+\exp\!\left(\frac{c-\Reg_X(A,B)}{h_X}\right)
+=
+2^{\frac{c-\Reg_X(A,B)}{H_{1/2,X}}}.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+From the regret definition,
+\[
+H_X(B)=H_X(A)-c+\Reg_X(A,B).
+\]
+Therefore
+\[
+\frac{R_X(B)}{R_X(A)}
+=
+\exp\!\left(-\frac{H_X(B)-H_X(A)}{h_X}\right)
+=
+\exp\!\left(\frac{c-\Reg_X(A,B)}{h_X}\right).
+\]
+Substituting $H_{1/2,X}=h_X\ln2$ gives the base-two form.
+\end{proof}
+
+\begin{corollary}[Geodesic growth]
+A zero-regret edge of cost $c$ multiplies repairability by
+\[
+R_X(B)=R_X(A)e^{c/h_X}.
+\]
+In the unit-cost case, every exact geodesic step multiplies $R_X$ by the same factor until settlement.
+\end{corollary}
+
+This is a useful conceptual bridge: Professor trajectories can be analyzed in terms of Compass regret without turning Professor into the Compass.
+
+\section{The second coordinate: verified mathematical capital}
+
+If $H_X$ already measures geometric proximity to settlement, then $q_X$ must not be another disguised distance score. In particular, definitions such as $q=1/(1+H)$ or $H=1/q-1$ collapse the two coordinates into one and destroy the intended semantics.
+
+The existing partial-credit note instead points toward target-relevant verified structure: valid premises, inference transactions, proved sublemmas, discharged obligations, and correct decomposition. This suggests that $q_X$ should be derived from a structured ledger rather than invented as a primitive scalar.
+
+\begin{definition}[Verified capital ledger]
+For a state $A$ and role $X$, let
+\[
+\mathcal K_X(A)
+\]
+be a typed ledger of verifier-backed mathematical items currently available to the search state. Possible item types include:
+\begin{itemize}
+\item verified premises and side conditions;
+\item verified sublemmas or instantiated BANK lemmas;
+\item discharged proof obligations;
+\item verified decompositions;
+\item certified substitutions or unifications;
+\item certified quotient or presentation-translation instruments;
+\item verified macros whose use is legal in the current context.
+\end{itemize}
+The ledger stores provenance and verifier status. It does not by itself assign a scalar grade.
+\end{definition}
+
+\begin{definition}[Active-capital scalarization]
+A frozen grading map
+\[
+Q_X:(A,\mathcal K_X(A))\mapsto[0,1]
+\]
+produces
+\[
+\boxed{q_X(A)=Q_X(A,\mathcal K_X(A)).}
+\]
+The entries of $\mathcal K_X(A)$ are verifier-backed; the scalarization $Q_X$ may still be heuristic or learned and must be labeled accordingly.
+\end{definition}
+
+\begin{warningnote}[Do not reward bookkeeping]
+An agent should not increase $q_X$ merely by generating many trivial verified statements. The scalarization should represent target-relevant structural contribution, not raw item count. Otherwise partial credit becomes gameable by producing mathematically valid but strategically useless clutter.
+\end{warningnote}
+
+\section{BANK stock and active capital are different}
+
+BANK is persistent verified memory. If BANK is deposit-only,
+\[
+\BANK_0\subseteq\BANK_1\subseteq\BANK_2\subseteq\cdots.
+\]
+But active capital is state-relative. A lemma remains true even when a branch change makes it irrelevant to the current target route.
+
+\begin{proposition}[Monotone stock does not imply monotone active credit]
+There exist monotone BANK trajectories and search states $A_t$ for which
+\[
+\BANK_t\subseteq\BANK_{t+1}
+\]
+for all $t$, while
+\[
+q_X(A_{t+1})<q_X(A_t).
+\]
+\end{proposition}
+
+\begin{proof}
+Take a verified lemma $L\in\BANK_t$ that is highly applicable in state $A_t$ and irrelevant in a later state $A_{t+1}$. The lemma remains in BANK, so BANK is monotone, while a state-relative relevance scalarization can assign lower active capital in $A_{t+1}$.
+\end{proof}
+
+This distinction becomes especially useful under presentation trading. A trade can make old verified material newly usable without increasing the theorem stock. In economic language, trading can increase the \emph{liquidity} of existing mathematical capital without increasing verified mathematical wealth. The language is metaphorical, but the distinction is precise: theorem truth is invariant while accessibility and applicability can change.
+
+\section{The true Professor state is two-dimensional}
+
+Define
+\[
+\boxed{\Pi_X(A)=(q_X(A),H_X(A))}
+\]
+or equivalently
+\[
+\boxed{\widetilde\Pi_X(A)=(q_X(A),R_X(A)).}
+\]
+The scalar Professor score is then a projection
+\[
+\PC_{X,\alpha}(A)=\alpha q_X(A)+(1-\alpha)R_X(A).
+\]
+
+Two states can have equal horizon but different verified capital, or equal capital but different horizons. Therefore the scalar $\PC$ should not be the only quantity logged. At minimum, a reproducible run should retain
+\[
+(q_X,H_X,R_X,\PC_X)
+\]
+with metadata stating whether $H_X$ is exact, bounded, or learned.
+
+\subsection{Pareto order}
+
+On the $(q,R)$ plane, define
+\[
+A\preceq_{\mathrm P}B
+\quad\Longleftrightarrow\quad
+q_X(A)\le q_X(B)\ \text{and}\ R_X(A)\le R_X(B).
+\]
+
+\begin{proposition}[Pareto dominance implies Professor dominance]
+For $0<\alpha<1$, if $A\preceq_{\mathrm P}B$ and at least one inequality is strict, then
+\[
+\PC_{X,\alpha}(A)<\PC_{X,\alpha}(B).
+\]
+\end{proposition}
+
+\begin{proof}
+Both weights are positive, so a componentwise nonnegative difference with at least one positive coordinate has positive weighted sum.
+\end{proof}
+
+Thus dominated states can be rejected without deciding the value of $\alpha$. The role of $\alpha$ appears only when states are incomparable.
+
+\section{Investment moves and the meaning of \texorpdfstring{$\alpha$}{alpha}}
+
+Mathematical research often moves temporarily away from a direct proof: proving a general lemma, changing representation, building an invariant, or developing a quotient can increase immediate search cost while creating useful verified structure.
+
+\begin{definition}[Investment move]
+A transition $A\to B$ is an investment move for role $X$ when
+\[
+\Delta q_X=q_X(B)-q_X(A)>0,
+\qquad
+\Delta R_X=R_X(B)-R_X(A)<0.
+\]
+Equivalently, verified capital rises while geometric repairability falls.
+\end{definition}
+
+\begin{theorem}[Exact Professor investment criterion]
+For $0<\alpha<1$, an investment move raises Professor partial credit if and only if
+\[
+\boxed{
+\alpha\Delta q_X>(1-\alpha)(-\Delta R_X).
+}
+\]
+Equivalently,
+\[
+\boxed{
+\frac{\Delta q_X}{-\Delta R_X}>\frac{1-\alpha}{\alpha}.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+The condition $\PC(B)>\PC(A)$ is
+\[
+\alpha\Delta q_X+(1-\alpha)\Delta R_X>0.
+\]
+Since $\Delta R_X<0$, rearrangement gives the stated inequalities.
+\end{proof}
+
+This gives $\alpha$ a concrete interpretation: it sets the exchange rate between a normalized unit of newly acquired verified mathematical capital and a normalized unit of sacrificed immediate repairability.
+
+\begin{corollary}[Critical exchange rate]
+Suppose $\Delta q_X>0$ and $\Delta R_X<0$. The indifference value of $\alpha$ is
+\[
+\boxed{
+\alpha^*=\frac{-\Delta R_X}{\Delta q_X-\Delta R_X}.
+}
+\]
+For $\alpha>\alpha^*$ the investment is Professor-improving; for $\alpha<\alpha^*$ it is Professor-worsening.
+\end{corollary}
+
+\begin{remark}
+This also explains why $\alpha$ should not be calibrated before $q_X$ and $H_{1/2,X}$ have meaningful scales. Rescaling either coordinate changes the economic meaning of the exchange rate.
+\end{remark}
+
+\section{Certified horizon intervals from Quotient Hunter}
+
+Exact $H_X$ will usually be unavailable during live search. The quotient theory~\cite{quotient} supplies one principled source of certified lower bounds.
+
+Suppose a certified relaxed quotient yields
+\[
+L_X(A)\le H_X(A),
+\]
+while a known constructive continuation or incumbent proof yields an upper bound
+\[
+H_X(A)\le U_X(A).
+\]
+
+\begin{theorem}[Repairability interval]
+If
+\[
+L_X(A)\le H_X(A)\le U_X(A)
+\]
+and $h_X>0$, then
+\[
+\boxed{
+ e^{-U_X(A)/h_X}
+\le R_X(A)\le
+ e^{-L_X(A)/h_X}.
+}
+\]
+Equivalently,
+\[
+\boxed{
+2^{-U_X(A)/H_{1/2,X}}
+\le R_X(A)\le
+2^{-L_X(A)/H_{1/2,X}}.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+The function $x\mapsto e^{-x/h_X}$ is decreasing.
+\end{proof}
+
+\begin{corollary}[Certified Professor interval]
+If $q_X(A)$ is fixed, then
+\[
+\boxed{
+\alpha q_X(A)+(1-\alpha)e^{-U_X(A)/h_X}
+\le \PC_X(A)
+\le
+\alpha q_X(A)+(1-\alpha)e^{-L_X(A)/h_X}.
+}
+\]
+\end{corollary}
+
+This yields three epistemic levels that should remain distinct:
+\[
+\begin{array}{lll}
+[L_X,U_X] &:& \text{certified geometric information},\\
+\widehat H_X &:& \text{learned or heuristic point estimate},\\
+H_X &:& \text{true exact horizon, usually unknown online}.
+\end{array}
+\]
+
+A learned estimate may be projected into a certified interval for decision convenience,
+\[
+\widehat H_X^{\mathrm{clip}}
+=\min\{U_X,\max\{L_X,\widehat H_X\}\},
+\]
+but clipping does not make the estimate exact. It only prevents it from contradicting known certified bounds.
+
+\section{Learning the horizon without pretending to know it}
+
+Solved proof DAGs provide objective retrospective supervision for exact distance-to-settlement labels on the retained explored graph: reverse breadth-first search in the unit-cost case, or reverse dynamic programming/shortest-path computation in the weighted acyclic case. This is a strong reason to learn $H$ rather than invent an ungrounded proxy.
+
+However, four distinctions are essential.
+\begin{enumerate}
+\item Exact retrospective graph distance on a retained solved graph is not the same thing as the unknown global minimum cost over every legal proof path in the entire formal system.
+\item A predictor $\widehat H$ trained on exact historical labels remains a predictor on unseen states.
+\item A predictor for proof-role horizons does not automatically train refutation, independence, or contradiction horizons.
+\item If the training corpus contains only proved theorems, the system must not claim equivalent successful $R/I/C$ trajectory supervision unless such data were separately constructed.
+\end{enumerate}
+
+This last point is directly relevant to set.mm. A 95\% corpus of successful set.mm theorem proofs provides abundant $P$-side data, but it does not automatically provide successful $R$, $I$, or $C$ terminal trajectories. A scientifically honest first experiment may therefore isolate the $P_1/P_2$ proof couple before claiming a trained eight-agent society.
+
+\section{Trading changes geometry, not the settlement question}
+
+A presentation trade preserves deductive content only under its certified hypotheses. The Trading Theorem framework~\cite{trading,tradingdensity} separates consequence closure from proof cost. Two presentations can satisfy
+\[
+P\equiv_{\Cn}P'
+\]
+while having different proof horizons, branching patterns, transaction costs, and search behavior.
+
+It is therefore natural to write a presentation-dependent horizon
+\[
+H_X^{(Q)}(A),
+\]
+where $Q$ denotes the active certified presentation or representation context.
+
+\begin{proposition}[Protected-baseline monotonicity]
+Suppose a trade-augmented search space retains every legal path of the original presentation and adds only additional certified transformation/search options, with all transformation and return-verification costs charged. Then the augmented horizon cannot exceed the original horizon:
+\[
+\boxed{H_{X,\mathrm{aug}}(A)\le H_{X,\mathrm{base}}(A).}
+\]
+\end{proposition}
+
+\begin{proof}
+Every baseline path remains admissible in the augmented space. Taking an infimum over a superset of paths cannot increase the infimum.
+\end{proof}
+
+This proposition does not say a particular implementation will run faster. Discovering, translating, validating, and searching a trade can be expensive. It says only that a correctly modeled augmented option set contains the baseline option when the baseline is protected.
+
+The geometric interpretation is useful:
+\begin{itemize}
+\item Presentation Manager changes the geometry.
+\item Quotient Hunter compresses or bounds the geometry.
+\item Proof Compass navigates the geometry.
+\item Professor evaluates progress within the geometry.
+\item Verifier alone decides mathematical settlement.
+\end{itemize}
+
+A trade may also raise active $q_X$ without creating new theorem stock by making previously dormant BANK material usable in the new presentation.
+
+\section{Directed awareness: diagonal and off-diagonal}
+
+Controlled Formal Awareness~\cite{awareness} defines a directed two-input quantity
+\[
+\boxed{\awa(M,N)}
+\]
+for the depth to which machine $M$ has a verifier-compatible formal representation of machine $N$ sufficient for sound reasoning about relevant states, transitions, proofs, settlement behavior, memory, strategy, or reflective behavior.
+
+Formal self-awareness is the diagonal:
+\[
+\boxed{\lev(M)=\awa(M,M).}
+\]
+In general,
+\[
+\awa(M,N)\ne\awa(N,M).
+\]
+At finite resource budget $B$, the operational quantity is
+\[
+\awa_B(M,N).
+\]
+The awareness horizon
+\[
+\boxed{H_{\mathrm{awa}}(M,N,k)}
+\]
+is the least verified cost required for $M$ to attain awareness depth $k$ about $N$.
+
+These definitions create a crucial distinction for a DATA MIND couple:
+\[
+\awa(X_1,X_1)
+\quad\text{versus}\quad
+\awa(X_1,X_2).
+\]
+The first is self-modeling. The second is partner-modeling.
+
+\section{Self-awareness and partial credit}
+
+Professor partial credit is a measurement signal. Self-awareness is a faculty that can interpret the signal in relation to the agent's own strategy and history.
+
+A clean feedback loop is
+\[
+\boxed{
+\text{strategy}
+\longrightarrow
+\text{search state}
+\longrightarrow
+(q,H,R,\PC)
+\longrightarrow
+\text{self-aware interpretation}
+\longrightarrow
+\text{strategy update}.
+}
+\]
+
+For example, a self-aware agent can distinguish trajectory regimes such as
+\[
+(\Delta q,\Delta R)=
+\begin{cases}
+(+,+), & \text{building and converging},\\
+(0,+), & \text{exploiting a route},\\
+(+,-), & \text{investment or strategic detour},\\
+(0,0), & \text{stagnation},\\
+(-,-), & \text{deterioration or loss of active relevance}.
+\end{cases}
+\]
+
+Self-awareness does not turn any of these judgments into mathematical truth. It may change search behavior, request alternatives, or communicate strategy assessments, while verifier semantics remain fixed.
+
+\subsection{A confounding issue in the current couple asymmetry}
+
+The frozen DATA MIND 3.1 architecture~\cite{snapshot} currently bundles two asymmetries:
+\[
+X_1:\text{ self-awareness + Professor},
+\qquad
+X_2:\text{ neither}.
+\]
+This is a legitimate architecture choice, but it creates an experimental confound. If $X_1$ outperforms $X_2$, the result does not by itself identify whether the cause was Professor feedback, self-awareness, their interaction, or another asymmetric implementation detail.
+
+\begin{researchnote}[Mechanism-identification ablation]
+A scientifically clean ablation may temporarily give both agents the same Professor feedback while withholding operational self-awareness from $X_2$. Such a run must be labeled an explicit ablation or alternate experimental architecture, not an official unmodified DATA MIND 3.1 run. It would test whether access to one's own partial-credit trajectory changes the use of the same external grading signal.
+\end{researchnote}
+
+\section{Partner-awareness as a control resource}
+
+The off-diagonal quantity
+\[
+\awa_B(X_1,X_2)
+\]
+can be useful precisely because $X_2$ remains strategically independent. A shallow but meaningful partner model may tell $X_1$ which strategy family $X_2$ is pursuing, which search region it covers, whether the two routes are becoming redundant, and whether a verified result deposited by $X_2$ is relevant to $X_1$.
+
+The right use is not imitation. In fact, partner-awareness can support anti-coordination:
+\[
+\boxed{
+\text{``My partner already covers that route, so my marginal value lies elsewhere.''}
+}
+\]
+
+\begin{warningnote}[Awareness must not earn mathematical credit directly]
+Increasing $\awa_B(X_1,X_2)$ should not by itself increase $q_{X_1}$ or $\PC_{X_1}$. Partner-awareness is a control resource. It earns its keep only indirectly if the information changes decisions in ways that improve certified settlement, verified capital, or useful transfer.
+\end{warningnote}
+
+\subsection{Controlled depth}
+
+Controlled Formal Awareness proposes lower and upper authorized bounds
+\[
+L_{ij}\le \awa_B(M_i,M_j)\le U_{ij}.
+\]
+For partner-awareness, the natural first design is therefore not maximal awareness but bounded, task-relative awareness:
+\[
+0<L_{12}\le \awa_B(X_1,X_2)\le U_{12}.
+\]
+The permitted information can be deliberately narrow, for example:
+\[
+(\text{strategy class},\ \text{search region},\ \text{recent verified progress},\ \text{overlap/complementarity}).
+\]
+
+\section{Value of awareness}
+
+Awareness consumes resources. The awareness horizon provides a natural cost coordinate.
+
+\begin{definition}[Value of awareness -- proposed]
+Let $G_{1\leftarrow2}(k\mid S)$ be the expected reduction in future cost-to-first-certified-settlement obtainable in system state $S$ if $X_1$ acquires depth-$k$ authorized awareness of $X_2$. Define
+\[
+\boxed{
+\VOA_{1\leftarrow2}(k\mid S)
+=
+G_{1\leftarrow2}(k\mid S)
+-
+H_{\mathrm{awa}}(X_1,X_2,k).
+}
+\]
+\end{definition}
+
+This is a proposed control quantity, not a theorem. It converts the question ``Is partner-awareness useful or a waste of resources?'' into a falsifiable cost-accounting question.
+
+The ideal awareness depth is not necessarily the largest attainable depth. One may instead seek
+\[
+\boxed{
+k^*(S)\in\arg\max_k\VOA_{1\leftarrow2}(k\mid S).}
+\]
+In practice, awareness can be event-triggered rather than continuous: stagnation, suspected duplication, a major partner strategy change, a new relevant BANK deposit, or a large pending resource reallocation are plausible triggers.
+
+\section{From individual progress to couple-level marginal value}
+
+The Professor answers an individual question:
+\[
+\text{How much progress does this state represent?}
+\]
+The controller must answer a different question:
+\[
+\boxed{\begin{minipage}{0.88\linewidth}\centering What additional value does funding this action create, given what the partner and society are already doing?\end{minipage}}
+\]
+
+This is a marginal-value problem.
+
+\begin{definition}[System-state marginal value -- schematic]
+Let $S$ denote the current multi-agent system state and let $S\oplus(i,a)$ denote the counterfactual state in which agent $i$ is funded to pursue action $a$ for the next declared compute tranche. For a declared system value functional $V$, define
+\[
+\boxed{
+\marg_i(a\mid S)
+=V(S\oplus(i,a))-V(S).
+}
+\]
+\end{definition}
+
+The definition is schematic because the difficult research problem is precisely how to estimate $V$ without building an intractable monolithic optimizer.
+
+\subsection{Duplication and complementarity}
+
+Suppose two actions $a_1$ and $a_2$ pursue almost the same proof region. Their standalone values may each be high, while their joint marginal value is much smaller because one duplicates the other. Conversely, a seemingly weaker independent route can have high marginal value because it hedges against model error or searches a region no other agent covers.
+
+Thus
+\[
+\boxed{\text{individual partial credit}\ne\text{marginal team value}.}
+\]
+Professor can grade the mathematics consistently while the controller separately accounts for overlap, diversity, transfer, and cost.
+
+\section{A role for the settlement tensor}
+
+The existing settlement tensor
+\[
+S_{a,b,r,c}(x)
+\]
+can mediate credit transfer. A verified lemma may be produced by agent $a$, deposited through the verifier into BANK, and later become active capital for agent $b$. The system can therefore distinguish:
+\begin{itemize}
+\item who created the verified item;
+\item who currently benefits from it;
+\item where in search space it arose;
+\item which settlement class it supports.
+\end{itemize}
+
+A rigorous transfer path is
+\[
+\boxed{
+\text{agent }a
+\longrightarrow V
+\longrightarrow \BANK
+\longrightarrow\text{certified applicability to }b
+\longrightarrow q_b\uparrow.
+}
+\]
+Unverified conversation between agents may be strategically useful, but it does not create BANK truth.
+
+\section{The awareness matrix and sparse topology}
+
+For the eight principal agents
+\[
+P_1,P_2,R_1,R_2,I_1,I_2,C_1,C_2,
+\]
+Directed Awareness supplies an $8\times8$ matrix
+\[
+A^{(B)}_{ij}=\awa_B(M_i,M_j).
+\]
+The diagonal entries are self-awareness depths. Off-diagonal entries are cross-agent awareness.
+
+There are $64$ directed entries. Making all of them large is neither necessary nor obviously desirable. The awareness theory itself argues for controlled authorized awareness, not maximal awareness everywhere.
+
+\begin{researchnote}[Sparse awareness graph]
+Treat each potential directed awareness edge $M_i\to M_j$ as a resource-bearing option. The experimental question is which edges have positive net value after awareness cost is charged. Within-couple edges such as $\awa(X_1,X_2)$ are natural first candidates because the agents pursue the same settlement role, but cross-role edges may also pay when they prevent global duplication or anticipate a competing settlement class.
+\end{researchnote}
+
+This turns awareness topology into an optimization problem of its own, but one that can be approached sparsely and incrementally rather than by constructing a complete society-wide model from the start.
+
+\section{Why the global optimization explodes}
+
+The apparently simple controller question
+\[
+\text{``Where should the next unit of compute go?''}
+\]
+hides a large joint state. A conceptual state vector can include
+\[
+\begin{aligned}
+S_t=(&A_{P_1},A_{P_2},A_{R_1},A_{R_2},A_{I_1},A_{I_2},A_{C_1},A_{C_2},\\
+&q_1,\ldots,q_8,H_1,\ldots,H_8,\BANK,\FUTUREBANK,\\
+&\text{presentations, quotients, awareness graph, overlap, resources, history, uncertainty}).
+\end{aligned}
+\]
+If agent $i$ has $m_i$ candidate actions, a naive joint action space has size
+\[
+\prod_{i=1}^{8}m_i.
+\]
+The landscape is also nonstationary: one verified lemma changes BANK; a presentation trade changes geometry; a quotient changes lower bounds; a partner discovery can make another route redundant.
+
+Therefore the controller should not attempt to solve theorem proving, awareness, quotienting, trading, and scheduling as one giant exact optimization.
+
+\section{The minimal-controller principle}
+
+The proposed solution is hierarchical decomposition.
+
+\subsection{Layer 1: non-negotiable admissibility}
+
+Before optimization, enforce:
+\begin{itemize}
+\item verifier correctness and certificate semantics;
+\item security and awareness authorization;
+\item legal transitions and certified transformation requirements;
+\item explicit resource budgets and Sentinel constraints;
+\item protected baseline/fallback rules where required.
+\end{itemize}
+Anything inadmissible is removed rather than assigned a poor score.
+
+\subsection{Layer 2: local agent intelligence}
+
+Each agent performs its own high-dimensional local proof search. The global controller should not inspect every frontier expansion. Instead, each agent periodically emits a small number of strategic proposals, for example:
+\[
+\begin{array}{ll}
+a_1:&\text{continue current route},\\
+a_2:&\text{invest in lemma }L,\\
+a_3:&\text{switch certified presentation},\\
+a_4:&\text{acquire bounded partner-awareness},\\
+a_5:&\text{diversify to a new region}.
+\end{array}
+\]
+
+\subsection{Layer 3: interpretable proposal vectors}
+
+A proposal should expose its estimated consequences rather than only an opaque scalar. A candidate schema is
+\[
+\boxed{
+G_i(a)=
+(\widehat{\Delta q_i},
+\widehat{\Delta H_i},
+\widehat{\Delta p_{\rm settle}},
+\widehat{\Delta T_{\rm transfer}},
+\widehat{D_{\rm diversity}},
+C_{\rm compute},
+U_{\rm model}).
+}
+\]
+Not every implementation must use exactly these fields; the point is to keep the decision auditable.
+
+\subsection{Layer 4: Pareto pruning before scalarization}
+
+If proposal $a$ is no better than proposal $b$ on every declared benefit coordinate and no cheaper or safer on any cost coordinate, discard $a$. This step requires no arbitrary weights.
+
+\subsection{Layer 5: duplication adjustment and marginal allocation}
+
+Among nondominated proposals, adjust for search overlap and partner coverage. A direct-search proposal that is already substantially covered by an independent partner should have lower marginal value than its standalone Professor grade suggests.
+
+Only at the final allocation stage should a simple declared tie-break or bid rule be used. One possible experimental family is
+\[
+\operatorname{Bid}_i(a)
+=
+\frac{\widehat{\marg_i(a\mid S)}+\kappa U_i(a)}{C_i(a)},
+\]
+where $U_i(a)$ is an exploration/uncertainty bonus and $\kappa$ is frozen in advance. This is a research design, not a canonical rule.
+
+\begin{remark}[The controller should be less intelligent than the society]
+The controller's job is bounded allocation, not global mathematical omniscience. Specialized modules should solve specialized subproblems and report structured evidence. This makes failures diagnosable and experiments interpretable.
+\end{remark}
+
+\section{Exploration, diversity, and the independent partner}
+
+A purely greedy allocator can repeatedly fund the route with the highest predicted immediate value. This may destroy exploration and make the society vulnerable to correlated model error.
+
+The strategically independent $X_2$ can therefore serve as more than a second prover. It can provide an epistemic hedge against Professor, Compass, or learner miscalibration. If the graded/self-aware $X_1$ is repeatedly attracted to high-scoring but barren regions while independent $X_2$ settles faster, the discrepancy is evidence that the progress model is miscalibrated.
+
+This motivates a diversity or option-value term, not as mathematical credit but as insurance against controller error. Its empirical value should be measured, not assumed.
+
+\section{Calibration awareness: awareness of the Professor's reliability}
+
+Self-awareness need not stop at asking whether the current proof strategy appears successful. Over repeated experience, an agent or controller can ask whether Professor trajectories themselves are predictive.
+
+Suppose states with rising $\PC$ historically do not lead to improved future certified settlement under a certain presentation or theorem family. Then a self-aware controller should reduce reliance on that signal in that context while leaving verifier semantics unchanged.
+
+\begin{researchnote}[Calibration awareness]
+Maintain calibration statistics such as
+\[
+\Pr(\text{settlement within budget }B\mid \Delta\PC>0,\text{ context features})
+\]
+and compare them against matched alternatives. This is awareness of the reliability of a control signal, not mathematical self-verification. It should alter resource allocation, not certificate acceptance.
+\end{researchnote}
+
+The independent partner provides a particularly useful control group for detecting systematic overconfidence in the graded route.
+
+\section{What the controller should optimize}
+
+The ultimate purpose of the society is first certified settlement, not accumulation of elegant intermediate scores. A defensible primary finite-budget objective is therefore
+\[
+\boxed{
+\max \Pr(\text{first verifier-accepted }P/R/I/C\text{ settlement before budget }B),
+}
+\]
+with expected time or cost to first verified settlement as a closely related objective.
+
+The quantities $q$, $H$, $\PC$, BANK growth, awareness, diversity, quotient bounds, and presentation gain should serve as predictors, option values, and secondary diagnostics. They should not silently replace certified settlement as the primary goal.
+
+This separation is crucial because a system can increase $q$ indefinitely by proving useful lemmas yet still fail to settle the target. Likewise, it can spend resources becoming highly aware of itself and its partners without making mathematical progress. The controller must charge these activities against the same finite resource budget.
+
+\section{A minimal first controller experiment}
+
+The theory suggests beginning with a much smaller system than the full eight-agent architecture.
+
+\subsection{Why begin with the proof couple}
+
+A frozen 95\% set.mm training corpus supplies successful proof trajectories and therefore plausible $P$-side horizon supervision. It does not automatically supply successful refutation, independence, or contradiction trajectories. A first controller experiment should therefore isolate the $P_1/P_2$ couple unless separate $R/I/C$ training data are explicitly constructed.
+
+\subsection{Suggested experimental arms}
+
+Using the same frozen held-out theorem targets, verifier, training split, and per-target resource budget, compare explicit arms such as:
+\[
+\begin{array}{ll}
+A:&\text{dual independent proof search with simple fair allocation};\\
+B:&A+\text{Professor measurement};\\
+C:&B+\text{self-awareness of the subscript-1 agent};\\
+D:&C+\text{bounded }\awa(P_1,P_2);\\
+E:&D+\text{minimal marginal-value controller}.
+\end{array}
+\]
+If symmetric Professor access is used to isolate the incremental effect of self-awareness, that arm must be labeled an explicit ablation/alternate architecture because the current frozen 3.1 snapshot gives Professor only to subscript 1.
+
+\subsection{Primary and secondary outcomes}
+
+Primary outcomes should remain certificate-based:
+\begin{itemize}
+\item verified settlement rate within fixed budget;
+\item time/cost to first verifier-accepted settlement.
+\end{itemize}
+Secondary diagnostics can include:
+\begin{itemize}
+\item expansions and wall time;
+\item $q,H,R,\PC$ trajectories;
+\item prediction error and calibration of $\widehat H$;
+\item proposal counts and Pareto-pruning rates;
+\item search overlap and diversity;
+\item BANK deposits and cross-agent reuse;
+\item awareness cost and estimated/realized $\VOA$;
+\item number and cost of trades/quotients;
+\item controller allocation decisions with explicit reasons.
+\end{itemize}
+
+\section{Falsifiable predictions}
+
+The synthesis yields several testable predictions. None should be treated as established until measured on sealed held-out problems.
+
+\begin{enumerate}
+\item \textbf{Compass--Professor consistency.} When both use the same transaction graph, exact or better-calibrated horizon estimates should improve the geometric component of Professor relative to ad hoc surrogates.
+\item \textbf{Two-coordinate advantage.} Logging and controlling with $(q,H)$ should diagnose useful investment phases that a one-dimensional horizon-only controller would prematurely abandon.
+\item \textbf{Pareto pruning efficiency.} A nontrivial fraction of strategic proposals should be removable by dominance before any scalar controller score is needed.
+\item \textbf{Partner-awareness value.} Bounded $\awa(P_1,P_2)$ should reduce waste from duplicated search or improve diversification enough to repay its measured awareness cost on at least some theorem families.
+\item \textbf{Awareness saturation.} Beyond some depth, additional partner-awareness should show diminishing or negative net value because modeling cost exceeds coordination benefit.
+\item \textbf{Independent-partner hedge.} Preserving a strategically independent route should improve robustness on problems where Professor/Compass predictions are systematically miscalibrated.
+\item \textbf{Quotient interval usefulness.} Certified quotient lower bounds, combined with constructive upper bounds, should produce tighter repairability intervals and safer controller decisions than unbounded learned point estimates alone.
+\item \textbf{Trading liquidity effect.} Some certified presentation changes should increase active $q$ by making existing BANK items useful even when no new theorem is added to BANK.
+\item \textbf{Minimal-controller sufficiency.} A hierarchical controller using local proposals, Pareto pruning, overlap adjustment, and bounded allocation should capture much of the benefit of coordination without solving the intractable joint action space.
+\end{enumerate}
+
+A negative result on any of these predictions is scientifically useful. In particular, if partner-awareness consumes more compute than it saves, the correct architectural response is to reduce or remove that awareness edge rather than preserve it for theoretical symmetry.
+
+\section{What should and should not be wired into DATA MIND 3.1}
+
+This note should precede implementation. The following items are natural candidates for a later explicit architecture amendment, but they are not silently frozen by this paper:
+\begin{itemize}
+\item identifying Professor $H_X$ with Compass $d_{C_X}$ under one shared legal transaction graph and cost convention;
+\item deciding whether Professor uses role-specific horizons $H_P,H_R,H_I,H_C$ or a global settlement horizon;
+\item defining the verified-capital ledger $\mathcal K_X$ and frozen scalarization $Q_X$;
+\item choosing calibration of $H_{1/2,X}$ and then interpreting/estimating $\alpha$;
+\item specifying whether Professor feedback remains asymmetric or is made symmetric in a later canonical architecture;
+\item specifying authorized partner-awareness bounds $L_{12},U_{12}$ and event triggers;
+\item freezing proposal schemas, Pareto rules, overlap metrics, and allocation cadence for the minimal controller;
+\item defining exactly which quotient/trading certificates can influence lower bounds, state merging, or presentation changes.
+\end{itemize}
+
+Items that should remain invariant include:
+\begin{itemize}
+\item verifier sovereignty over mathematical status;
+\item explicit separation of certified, learned, and speculative quantities;
+\item protected provenance for BANK and transformed presentations;
+\item strategic independence where the architecture explicitly requires it;
+\item honest labeling of surrogates, ablations, stubs, and unexercised components;
+\item no claim that a green workflow or controller score is a mathematical proof.
+\end{itemize}
+
+\section{The whole theory in one picture}
+
+The synthesis can be summarized as a chain of distinct maps rather than one giant objective:
+\[
+\boxed{
+\begin{array}{c}
+\text{Verifier-defined settlement sets }C_X\\
+\Downarrow\\
+\text{legal weighted geometry }G_X\\
+\Downarrow\\
+H_X=d_{C_X}\\
+\Downarrow\\
+R_X=2^{-H_X/H_{1/2,X}}\\
+\end{array}}
+\qquad
+\boxed{
+\begin{array}{c}
+\text{verified mathematical items}\\
+\Downarrow\\
+\mathcal K_X(A)\\
+\Downarrow\\
+q_X(A)
+\end{array}}
+\]
+which combine into
+\[
+\boxed{
+\Pi_X(A)=(q_X(A),H_X(A)),
+\qquad
+\PC_X(A)=\alpha q_X(A)+(1-\alpha)R_X(A).
+}
+\]
+
+The geometric and capital coordinates are then interpreted by awareness:
+\[
+\boxed{
+\awa(X_1,X_1):\text{ What am I doing?}
+}
+\]
+\[
+\boxed{
+\awa(X_1,X_2):\text{ What is my independent partner doing?}
+}
+\]
+while the controller asks
+\[
+\boxed{
+\text{Where does the next unit of compute have the greatest marginal value?}
+}
+\]
+subject to verifier, security, and resource constraints.
+
+The modules therefore have nonredundant jobs:
+\[
+\begin{array}{ll}
+\textbf{Verifier} & \text{decides accepted mathematical status},\\
+\textbf{BANK} & \text{stores persistent verified mathematical capital},\\
+\textbf{$q$} & \text{measures active target-relevant use of verified capital},\\
+\textbf{Compass/$H$} & \text{models settlement geometry},\\
+\textbf{Professor} & \text{summarizes individual progress},\\
+\textbf{Self-awareness} & \text{interprets one's own strategy and progress trajectory},\\
+\textbf{Partner-awareness} & \text{models enough of another searcher to coordinate},\\
+\textbf{QH/Trading} & \text{bound, compress, or change search geometry},\\
+\textbf{Independent partner} & \text{preserves diversity and hedges model error},\\
+\textbf{Controller} & \text{allocates scarce computation marginally}.
+\end{array}
+\]
+
+\section{Conclusion}
+
+The central lesson is that partial credit is not merely a grading trick placed on top of theorem proving. Once the repair horizon is identified with Proof Compass geometry, the Professor's exponential term becomes a bounded coordinate on distance-to-settlement. Once $q$ is treated as active verified mathematical capital rather than a second closeness proxy, progress becomes naturally two-dimensional. Pareto order appears before scalarization; investment moves become mathematically expressible; and $\alpha$ acquires the meaning of an exchange rate between verified capital and immediate repairability.
+
+Directed awareness then widens the theory. Self-awareness $\awa(X_1,X_1)$ allows an agent to interpret its own progress trajectory, while bounded partner-awareness $\awa(X_1,X_2)$ can detect duplication, support complementary search, and preserve the strategic value of an independent partner. Because awareness itself costs computation, it must be treated as an investment with a measurable value-of-awareness rather than as a free universal good.
+
+The resulting global problem is indeed massive if written as one joint optimization. The proposed architectural response is not a more elaborate master objective. It is decomposition: hard correctness constraints, local agent intelligence, small interpretable strategic proposals, Pareto pruning, duplication adjustment, and marginal resource allocation. The controller should be less intelligent than the entire society and more auditable than a monolithic policy.
+
+This creates a concrete scientific program. First formalize and freeze the shared geometry, capital ledger, awareness bounds, and minimal controller interface. Then test them incrementally on sealed proof-side benchmarks before broad eight-agent integration. The decisive question is not whether the theory sounds coherent. It is whether each added layer---Professor, self-awareness, partner-awareness, quotient bounds, trading, and marginal allocation---earns more verified settlement value than the resources it consumes.
+
+\appendix
+\section{Claim-status map}
+
+\begin{longtable}{p{0.25\textwidth}p{0.17\textwidth}p{0.50\textwidth}}
+\toprule
+\textbf{Item} & \textbf{Status in this note} & \textbf{Comment}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Item} & \textbf{Status in this note} & \textbf{Comment}\\
+\midrule
+\endhead
+Proof Compass distance-to-settlement & Source-derived & Existing Compass Theory.\\
+Professor $q+H$ partial-credit form & Source-derived & Existing transaction-geometric partial-credit framework and frozen 3.1 snapshot.\\
+$H_{\rm Prof}=d_C$ & Derived here, conditional & Exact when state graph, legal edges, costs, and terminal set coincide.\\
+Repair half-distance & Derived here / interpretive & Algebraic reparameterization of exponential repairability, inspired by the supplied half-life manuscript.\\
+Regret transport law & Derived here & Elementary algebra from exact horizon regret.\\
+Capital ledger $\mathcal K_X$ & Proposed here & Makes $q$ auditable and separates verified ingredients from scalarization.\\
+Pareto Professor state & Derived/proposed & Dominance proposition is elementary; use as controller design is proposed.\\
+$\alpha$ as exchange rate & Derived here & Follows from the investment inequality after scales are fixed.\\
+Quotient repairability interval & Derived here & Follows from certified horizon bounds and monotonicity of the exponential.\\
+Directed $\awa(M,N)$ and awareness horizon & Source-derived & Controlled Formal Awareness Security.\\
+Value of awareness $\VOA$ & Proposed here & Cost-accounted control objective; requires empirical estimation.\\
+Partner-awareness anti-coordination & Proposed here & Hypothesis that bounded awareness can preserve diversity and reduce duplication.\\
+Marginal-value controller & Proposed here & Architectural decomposition, not yet a frozen runtime rule.\\
+Symmetric Professor ablation & Proposed here & Experimental mechanism-identification arm; conflicts with unmodified Snapshot 001 and must be labeled accordingly.\\
+\bottomrule
+\end{longtable}
+
+\section{Minimal controller pseudocode -- research form}
+
+The following pseudocode is intentionally schematic. It is not executable DATA MIND 3.1 code and does not silently define unresolved interfaces.
+
+\begin{enumerate}
+\item Receive the current verified system state, declared budgets, security constraints, and agent activity status.
+\item For each active agent, request a small bounded set of strategic proposals. Each proposal includes declared cost, expected changes in $q$ and $H$ or $R$, settlement estimate, uncertainty, transfer potential, and overlap/diversity features.
+\item Reject proposals that violate verifier, security, presentation-translation, resource, or Sentinel admissibility rules.
+\item Remove Pareto-dominated proposals under the declared benefit/cost coordinates.
+\item Estimate pairwise or society-level duplication and marginal contribution conditional on currently funded routes.
+\item Where useful, purchase bounded partner-awareness only if its expected value exceeds its charged awareness cost under the current model.
+\item Allocate the next fixed compute tranche according to a frozen marginal-value or bid rule, retaining an explicit exploration/diversity mechanism.
+\item Execute the tranche. Verify mathematical outputs before BANK deposit. Record all controller inputs, decisions, realized costs, and outcomes.
+\item Recompute after significant verified events, not after every primitive proof expansion unless the experiment explicitly requires that cadence.
+\end{enumerate}
+
+\section{Suggested notation for a later implementation specification}
+
+\[
+\begin{array}{ll}
+G_X=(S_X,E_X,w_X) & \text{role-specific legal search graph},\\
+C_X & \text{verifier-accepted terminal set},\\
+H_X(A)=d(A,C_X) & \text{exact settlement horizon},\\
+{[L_X(A),U_X(A)]} & \text{certified horizon interval},\\
+\widehat H_X(A) & \text{learned point estimate},\\
+H_{1/2,X} & \text{repair half-distance},\\
+R_X(A)=2^{-H_X/H_{1/2,X}} & \text{repairability coordinate},\\
+\mathcal K_X(A) & \text{verified capital ledger},\\
+q_X(A)=Q_X(A,\mathcal K_X(A)) & \text{active-capital scalarization},\\
+\Pi_X(A)=(q_X,H_X) & \text{two-coordinate Professor state},\\
+\PC_X(A) & \text{scalar Professor projection},\\
+\awa_B(M,N) & \text{budgeted directed awareness},\\
+H_{\rm awa}(M,N,k) & \text{awareness acquisition cost},\\
+\VOA_{i\leftarrow j}(k\mid S) & \text{proposed value of awareness},\\
+\marg_i(a\mid S) & \text{proposed marginal system value of action}.
+\end{array}
+\]
+
+\begin{thebibliography}{99}
+
+\bibitem{compass}
+Brian Tenneson,
+\emph{Compass Theory for Proof Search: From the Average Well-Formed Formula to Hilbert and Compass-Informed Navigation},
+15 August 2026.
+
+\bibitem{partialcredit}
+OpenAI ChatGPT (GPT-5.6 Thinking), inspired by a question and handwritten sketch from Brian Tenneson,
+\emph{Proof Density, Partial Credit, and Transaction Geometry: A Brief Conceptual Note on Human Grading and Binary Proof Verification},
+5 August 2026.
+
+\bibitem{quotient}
+Brian Tenneson,
+\emph{Redundancy-Quotient Geodesic Theory for Formal Proofs},
+Working research manuscript, Version 0.7, 27 August 2026.
+
+\bibitem{trading}
+Brian Tenneson,
+\emph{Trading Theorem 001: Consequence-Preserving Trades, Quotient Hunting, and Verified Settlement Search},
+31 August 2026.
+
+\bibitem{tradingdensity}
+Brian Tenneson,
+\emph{Proof Density After Trading: A Sequel on Presentation Geometry, Budgeted Preorders, SICs, ATPs, and Formal Self-Awareness},
+31 August 2026.
+
+\bibitem{awareness}
+Brian Tenneson,
+\emph{Controlled Formal Awareness Security: Awareness, Capability, Preorders, Federation, Proof Depth, and Nonstandard Bounds for Intelligent Target Seekers},
+Working Draft, 2 September 2026.
+
+\bibitem{halflife}
+Brian Tenneson,
+\emph{Multi-Dose Concentration Derivation},
+Version 6.1, 2026.
+
+\bibitem{snapshot}
+Brian Tenneson,
+\emph{DATA MIND 3.1 -- Canonical Architecture Snapshot 001},
+Frozen architecture snapshot, 3 September 2026.
+
+\bibitem{thesis}
+Brian Tenneson,
+\emph{DATA MIND Thesis Statements},
+2 September 2026.
+
+\end{thebibliography}
+
+\end{document}
