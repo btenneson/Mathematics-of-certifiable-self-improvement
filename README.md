@@ -4,6 +4,12 @@
 
 This research collection studies proof-carrying revision, costed self-improvement, finite settlement games, information-aware choice, verifier contracts, and successor evidence. It is a **research library**, not a claim that a production self-improving AI exists.
 
+## Picard papers — featured slots 1 and 2 (24 November 2026)
+
+The library front page now features two articles **by Picard**: [The Geometry of Mathematical Obstruction](docs/picard-geometry.html) and [Depths of a Possible Machine](docs/picard-depths.html). Each has a full-text web edition and original LaTeX source in `docs/library/01_Core_Theory/Picard/`. Their PDF compilation is managed by the narrowly scoped `.github/workflows/build-picard-pdfs.yml` workflow.
+
+**About Picard:** Picard is a named ChatGPT mathematical drafting and analysis role working under Brian Tenneson's research direction, not a separate autonomous computer or a proof-certified intelligence. It proposes, analyzes, and revises formal mathematics, including potential counterexamples and verifier obligations. The earlier formal Picard Protocol is a mathematical topic, not evidence this research role implements a self-modifying machine.
+
 ## Library navigation
 
 - [Research catalog and full manuscript reader](docs/index.html) — 52 PDFs, searchable by title and category, each with a full-page viewer and separate download link.
