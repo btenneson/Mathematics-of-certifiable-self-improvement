@@ -1,4 +1,4 @@
-// Private, same-origin full-document reader. Document bytes are fetched from docs/library.
+// Same-origin full-document reader. Document bytes are fetched from docs/library.
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const id=Number(params.get('id'));
@@ -44,10 +44,10 @@ async function main(){
  const url=new URL(article.link,location.href);
  const libraryBase=new URL('library/',location.href);
  if(url.origin!==location.origin||!url.pathname.startsWith(libraryBase.pathname)||!url.pathname.toLowerCase().endsWith('.pdf')){
-  fail('The catalog PDF address failed the private-library safety check.');original.hidden=download.hidden=true;return
+  fail('The catalog PDF address failed the same-origin library safety check.');original.hidden=download.hidden=true;return
  }
  $('paper-title').textContent=article.title;
- $('paper-meta').textContent=(article.pages||'?')+' pages · '+article.category+' · Complete manuscript';
+ $('paper-meta').textContent=(article.pages?article.pages+' pages · ':'')+article.category+' · Complete manuscript';
  document.title=article.title+' — Full PDF reader';
  original.href=url.href;
  download.href=url.href;
