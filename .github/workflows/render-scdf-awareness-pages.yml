@@ -1,0 +1,37 @@
+name: Render SCDF awareness manuscript pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/library/01_Core_Theory/Picard/SCDF_Certified_Awareness_and_the_Price_of_Choosing_001v2.pdf'
+      - '.github/workflows/render-scdf-awareness-pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PDF renderer
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+      - name: Render exact published PDF
+        run: |
+          set -eu
+          pdf='docs/library/01_Core_Theory/Picard/SCDF_Certified_Awareness_and_the_Price_of_Choosing_001v2.pdf'
+          test "$(pdfinfo "$pdf" | awk '/^Pages:/{print $2}')" = 13
+          mkdir -p docs/assets/scdf-awareness-pages
+          pdftoppm -r 150 -png "$pdf" docs/assets/scdf-awareness-pages/page
+          for page in $(seq -w 1 13); do
+            test -s "docs/assets/scdf-awareness-pages/page-$page.png"
+          done
+      - name: Commit page previews
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f docs/assets/scdf-awareness-pages/page-*.png
+          if ! git diff --cached --quiet; then
+            git commit -m 'Publish 13 static SCDF awareness manuscript pages'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
