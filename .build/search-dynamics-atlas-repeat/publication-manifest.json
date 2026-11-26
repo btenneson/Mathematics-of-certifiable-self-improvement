@@ -1,0 +1,24 @@
+[
+  {
+    "title": "From Search Dynamics to Semi-Ideal Computers — Part I",
+    "subtitle": "Theorem Mazes, Certified Settlement, and Feedback Control",
+    "desc": "Corrected and expanded foundations of rational theorem mazes, typed settlement, verified-history SICs, safe quotienting, and feedback control. Historical experiments remain explicitly limited.",
+    "pages": 18,
+    "pdf": "library/01_Core_Theory/Picard/From_Search_Dynamics_to_Semi-Ideal_Computers_Part_I_Correctedv2v2.pdf",
+    "tex": "library/01_Core_Theory/Picard/From_Search_Dynamics_to_Semi-Ideal_Computers_Part_I_Correctedv2v2.tex",
+    "page": "search_dynamics_sic_part_i_atlas_repeat.html",
+    "sha256": "b42d89bd675b65b9ef5291b5439abf24fd76e57b201bb7c86be33d546fe3f484",
+    "source_sha": "3677a48769069be088698aad25b5711a072eb0838e1b5470c8abb6f3b601bd37"
+  },
+  {
+    "title": "From Search Dynamics to Semi-Ideal Computers — Part II",
+    "subtitle": "The Geometry of Incomplete Proof Knowledge: Certified Envelopes, Active Discovery, and Reliable Feedback",
+    "desc": "Certified inner and outer proof-graph envelopes, optimality certificates, active discovery, embedding stability, and reliable feedback. A 64-case synthetic experiment compares fixed-order and geometry-guided edge queries; no real ATP speedup is claimed.",
+    "pages": 13,
+    "pdf": "library/01_Core_Theory/Picard/From_Search_Dynamics_to_Semi-Ideal_Computers_Part_IIv2v2.pdf",
+    "tex": "library/01_Core_Theory/Picard/From_Search_Dynamics_to_Semi-Ideal_Computers_Part_IIv2v2.tex",
+    "page": "search_dynamics_sic_part_ii_atlas_repeat.html",
+    "sha256": "d3e6d0f0c0fe8c6f5054b3d7ddc443d50df6bf440a8158d9ed26502ac6787d42",
+    "source_sha": "932e4c1412fcbf0b72bd5bb09aee85ec86a012632333a38bfe5bff7f5b4ed5a9"
+  }
+]
