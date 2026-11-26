@@ -42,6 +42,7 @@ function fail(msg){notice(msg);for(const b of [prev,next,pageInput,zoomIn,zoomOu
 async function main(){
  // Dedicated, plug-in-free reader for the audited Sovereign–Oracle manuscript.
  if(id===84 && article){const page=Math.min(10,Math.max(1,Math.floor(Number(params.get('page'))||1)));location.replace('sovereign-oracle-compatibility.html#page-'+page);return}
+ if(id===89 && article){const page=Math.min(13,Math.max(1,Math.floor(Number(params.get('page'))||1)));location.replace('scdf-certified-awareness.html#page-'+page);return}
  if(!article){fail('No available PDF matches this catalog entry. Return to All papers.');original.hidden=download.hidden=true;return}
  const url=new URL(article.link,location.href);
  const libraryBase=new URL('library/',location.href);
