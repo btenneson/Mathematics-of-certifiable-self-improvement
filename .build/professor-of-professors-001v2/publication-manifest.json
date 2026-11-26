@@ -1,0 +1,13 @@
+[
+  {
+    "title": "The Professor of Professors",
+    "subtitle": "Probabilistic Partial Credit, Recursive Awareness, and the Oracle Limit",
+    "desc": "Recursive probabilistic partial credit, monotone expected squared-error ignorance, exact limiting grade recovery, and a halting-encoded noncomputable limit. Includes an exact finite Bayesian example comparing fresh evidence with redundant evidence. Conditional mathematical results; no deployed oracle or independent formal verification claimed.",
+    "pages": 12,
+    "pdf": "library/01_Core_Theory/Picard/The_Professor_of_Professors_001v2.pdf",
+    "tex": "library/01_Core_Theory/Picard/The_Professor_of_Professors_001v2.tex",
+    "page": "the_professor_of_professors_001v2.html",
+    "sha256": "216ff8f8616d86c351f0da49aa07902f9bf736068687e75ee4f0b9acc86353f5",
+    "source_sha": "e7f86a1d36cd86ba427277ff256b233c8fe0dcb5c89b1b2b5237588e3a871da8"
+  }
+]
